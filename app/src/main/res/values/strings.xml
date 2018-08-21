@@ -4,4 +4,7 @@
     <string name="leaderboard">Leaderboard</string>
     <string name="achievements">Achievements</string>
     <string name="consents">Consents</string>
+    <string name="start">Start</string>
+    <string name="time">Time</string>
+    <string name="average">Average:</string>
 </resources>

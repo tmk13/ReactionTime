@@ -1,13 +1,191 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".GameFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.tokodeveloper.reactiontime.viewmodels.GameViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:orientation="vertical"
+        tools:context=".GameFragment">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineCenter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.50" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/guidelineTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.30" />
+
+            <TextView
+                android:id="@+id/time1Label"
+                style="@style/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/guidelineTop"
+                tools:text="Time 1:" />
+
+            <TextView
+                android:id="@+id/time1Text"
+                style="@style/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/time1Label"
+                app:layout_constraintStart_toEndOf="@+id/time1Label"
+                app:layout_constraintTop_toBottomOf="@+id/time1Label"
+                tools:text="314" />
+
+            <TextView
+                android:id="@+id/time2Label"
+                style="@style/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time1Label"
+                tools:text="Time 2:" />
+
+            <TextView
+                android:id="@+id/time2Text"
+                style="@style/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/time2Label"
+                app:layout_constraintStart_toEndOf="@+id/time2Label"
+                app:layout_constraintTop_toBottomOf="@+id/time2Label"
+                tools:text="296" />
+
+            <TextView
+                android:id="@+id/time3Label"
+                style="@style/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/time2Label"
+                tools:text="Time 3:" />
+
+            <TextView
+                android:id="@+id/time3Text"
+                style="@style/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/time3Label"
+                app:layout_constraintStart_toEndOf="@+id/time3Label"
+                app:layout_constraintTop_toBottomOf="@+id/time3Label"
+                tools:text="398" />
+
+            <TextView
+                android:id="@+id/time4Label"
+                style="@style/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
+                app:layout_constraintTop_toBottomOf="@+id/guidelineTop"
+                tools:text="Time 4:" />
+
+            <TextView
+                android:id="@+id/time4Text"
+                style="@style/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/time4Label"
+                app:layout_constraintStart_toEndOf="@+id/time4Label"
+                app:layout_constraintTop_toBottomOf="@+id/time4Label"
+                tools:text="426" />
+
+            <TextView
+                android:id="@+id/time5Label"
+                style="@style/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
+                app:layout_constraintTop_toBottomOf="@+id/time4Label"
+                tools:text="Time 5:" />
+
+            <TextView
+                android:id="@+id/time5Text"
+                style="@style/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/time5Label"
+                app:layout_constraintStart_toEndOf="@+id/time5Label"
+                app:layout_constraintTop_toBottomOf="@+id/time5Label"
+                tools:text="285" />
+
+            <TextView
+                android:id="@+id/averageLabel"
+                style="@style/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/average"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/guidelineCenter" />
+
+            <TextView
+                android:id="@+id/averageText"
+                style="@style/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/averageLabel"
+                app:layout_constraintStart_toEndOf="@+id/averageLabel"
+                app:layout_constraintTop_toBottomOf="@+id/averageLabel"
+                tools:text="347" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <Button
+            android:id="@+id/toggle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            tools:text="@string/start"
+            android:onClick="@{viewModel::userClickedButton}"/>
+
+    </LinearLayout>
+</layout>
