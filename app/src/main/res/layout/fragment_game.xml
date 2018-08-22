@@ -10,30 +10,38 @@
             type="com.tokodeveloper.reactiontime.viewmodels.GameViewModel" />
     </data>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        tools:context=".GameFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_height="match_parent">
 
-            <android.support.constraint.Guideline
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineLeft"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25" />
+
+            <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineCenter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.50" />
 
-            <android.support.constraint.Guideline
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineRight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.75" />
+
+            <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineTop"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.30" />
+                app:layout_constraintGuide_percent="0.15" />
 
             <TextView
                 android:id="@+id/time1Label"
@@ -43,19 +51,19 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+                android:text="@string/time_1"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/guidelineTop"
-                tools:text="Time 1:" />
+                app:layout_constraintTop_toBottomOf="@+id/guidelineTop" />
 
             <TextView
                 android:id="@+id/time1Text"
                 style="@style/TimeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:text="@{viewModel.state[1]}"
                 app:layout_constraintBottom_toTopOf="@+id/time1Label"
-                app:layout_constraintStart_toEndOf="@+id/time1Label"
+                app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
                 app:layout_constraintTop_toBottomOf="@+id/time1Label"
                 tools:text="314" />
 
@@ -67,19 +75,19 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/time1Label"
-                tools:text="Time 2:" />
+                android:text="@string/time_2" />
 
             <TextView
                 android:id="@+id/time2Text"
                 style="@style/TimeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:text="@{viewModel.state[2]}"
                 app:layout_constraintBottom_toTopOf="@+id/time2Label"
-                app:layout_constraintStart_toEndOf="@+id/time2Label"
+                app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
                 app:layout_constraintTop_toBottomOf="@+id/time2Label"
                 tools:text="296" />
 
@@ -91,19 +99,19 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toStartOf="@+id/guidelineCenter"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/time2Label"
-                tools:text="Time 3:" />
+                android:text="@string/time_3" />
 
             <TextView
                 android:id="@+id/time3Text"
                 style="@style/TimeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:text="@{viewModel.state[3]}"
                 app:layout_constraintBottom_toTopOf="@+id/time3Label"
-                app:layout_constraintStart_toEndOf="@+id/time3Label"
+                app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
                 app:layout_constraintTop_toBottomOf="@+id/time3Label"
                 tools:text="398" />
 
@@ -115,19 +123,19 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
                 app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
                 app:layout_constraintTop_toBottomOf="@+id/guidelineTop"
-                tools:text="Time 4:" />
+                android:text="@string/time_4" />
 
             <TextView
                 android:id="@+id/time4Text"
                 style="@style/TimeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:text="@{viewModel.state[4]}"
                 app:layout_constraintBottom_toTopOf="@+id/time4Label"
-                app:layout_constraintStart_toEndOf="@+id/time4Label"
+                app:layout_constraintStart_toStartOf="@+id/guidelineRight"
                 app:layout_constraintTop_toBottomOf="@+id/time4Label"
                 tools:text="426" />
 
@@ -139,19 +147,19 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
                 app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
                 app:layout_constraintTop_toBottomOf="@+id/time4Label"
-                tools:text="Time 5:" />
+                android:text="@string/time_5" />
 
             <TextView
                 android:id="@+id/time5Text"
                 style="@style/TimeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:text="@{viewModel.state[5]}"
                 app:layout_constraintBottom_toTopOf="@+id/time5Label"
-                app:layout_constraintStart_toEndOf="@+id/time5Label"
+                app:layout_constraintStart_toStartOf="@+id/guidelineRight"
                 app:layout_constraintTop_toBottomOf="@+id/time5Label"
                 tools:text="285" />
 
@@ -163,29 +171,95 @@
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:text="@string/average"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/guidelineCenter" />
+                app:layout_constraintBottom_toTopOf="@+id/guidelineCenterHorizontal"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineCenter" />
 
             <TextView
                 android:id="@+id/averageText"
                 style="@style/TimeTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/averageLabel"
-                app:layout_constraintStart_toEndOf="@+id/averageLabel"
+                app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
                 app:layout_constraintTop_toBottomOf="@+id/averageLabel"
-                tools:text="347" />
+                tools:text="347"
+                android:text="@{viewModel.average}"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineCenterHorizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.50" />
+
+            <Button
+                android:id="@+id/start"
+                android:visibility="@{viewModel.startVisibility, default=visible}"
+                android:background="@android:color/white"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="@{viewModel::userClickedStartButton}"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guidelineCenterHorizontal"
+                android:text="@string/start" />
+
+            <Button
+                android:id="@+id/wait"
+                android:visibility="@{viewModel.waitVisibility, default=gone}"
+                android:background="@android:color/holo_red_dark"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="@{viewModel::userClickedStartButton}"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guidelineCenterHorizontal"
+                android:text="@string/wait" />
+
+            <Button
+                android:id="@+id/stop"
+                android:visibility="@{viewModel.stopVisibility, default=gone}"
+                android:background="@android:color/holo_green_dark"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="@{viewModel::userClickedStopButton}"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guidelineCenterHorizontal"
+                android:text="@string/stop" />
+
+            <Button
+                android:id="@+id/restart"
+                android:visibility="@{viewModel.restartVisibility, default=gone}"
+                android:background="@android:color/white"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="@{viewModel::userClickedRestartButton}"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guidelineCenterHorizontal"
+                android:text="@string/restart" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <Button
-            android:id="@+id/toggle"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="20sp"
-            tools:text="@string/start"
-            android:onClick="@{viewModel::userClickedButton}"/>
-
-    </LinearLayout>
 </layout>

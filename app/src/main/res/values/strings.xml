@@ -7,4 +7,12 @@
     <string name="start">Start</string>
     <string name="time">Time</string>
     <string name="average">Average:</string>
+    <string name="stop">Now!</string>
+    <string name="restart">Restart</string>
+    <string name="wait">Wait for green...</string>
+    <string name="time_1">Time 1:</string>
+    <string name="time_2">Time 2:</string>
+    <string name="time_3">Time 3:</string>
+    <string name="time_4">Time 4:</string>
+    <string name="time_5">Time 5:</string>
 </resources>
