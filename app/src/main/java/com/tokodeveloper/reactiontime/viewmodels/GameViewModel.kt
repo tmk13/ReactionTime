@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import com.tokodeveloper.reactiontime.models.Error
 import com.tokodeveloper.reactiontime.models.GameModelImpl
 import com.tokodeveloper.reactiontime.models.Result
-import com.tokodeveloper.reactiontime.models.Success
 import com.tokodeveloper.reactiontime.services.GameService
 import com.tokodeveloper.reactiontime.services.GameServiceImpl
 
@@ -19,7 +18,12 @@ class GameViewModel : ViewModel() {
 
     private var _result = MutableLiveData<Result>()
     private var _gameState = MutableLiveData<HashMap<Int, String>>()
+    private var _correct = MutableLiveData<List<Boolean>>()
     private var _average = MutableLiveData<String>()
+    private var _finished = MutableLiveData<Boolean>()
+    private var _averageVisibility = MutableLiveData<Int>()
+    private var _errorVisibility = MutableLiveData<Int>()
+    private var _errorValue = MutableLiveData<Int>()
     private var _startVisibility = MutableLiveData<Int>()
     private var _waitVisibility = MutableLiveData<Int>()
     private var _stopVisibility = MutableLiveData<Int>()
@@ -30,13 +34,25 @@ class GameViewModel : ViewModel() {
         _waitVisibility.value = View.GONE
         _stopVisibility.value = View.GONE
         _restartVisibility.value = View.GONE
+        _errorVisibility.value = View.GONE
+        _finished.value = false
     }
 
     val result: LiveData<Result> = _result
 
     val state: LiveData<HashMap<Int, String>> = _gameState
 
+    val correct: LiveData<List<Boolean>> = _correct
+
     val average: LiveData<String> = _average
+
+    val finished: LiveData<Boolean> = _finished
+
+    val averageVisibility: LiveData<Int> = _averageVisibility
+
+    val errorVisibility: LiveData<Int> = _errorVisibility
+
+    val errorValue: LiveData<Int> = _errorValue
 
     val startVisibility: LiveData<Int> = _startVisibility
 
@@ -53,26 +69,44 @@ class GameViewModel : ViewModel() {
         }
     }
 
+    fun userClickedWaitButton(view: View?) {
+        gameService.restart()
+        _gameState.postValue(gameService.state)
+        startVisible()
+    }
+
     fun userClickedStopButton(view: View?) {
         startVisible()
 
         gameService.stop {
             _result.value = it
-            _gameState.value = gameService.state
+            _gameState.postValue(gameService.state)
+            _correct.postValue(gameService.state.map { myMap -> !myMap.value.endsWith("!") })
+            checkError()
             setAverage()
             checkFinished()
         }
     }
 
-    private fun checkFinished() {
-        val result = _result.value
-
-        if (result is Success) {
-            if (result.finished) {
-                restartVisible()
+    private fun checkError() {
+        when (_result.value) {
+            is Error -> showError()
+            else -> {
             }
-        } else if (result is Error) {
+        }
+    }
 
+    private fun showError() {
+        _averageVisibility.postValue(View.GONE)
+        _errorVisibility.postValue(View.VISIBLE)
+        restartVisible()
+    }
+
+    private fun checkFinished() {
+        val fin = gameService.finished
+        if (fin) {
+            _finished.postValue(fin)
+            restartVisible()
         }
     }
 
@@ -88,19 +122,25 @@ class GameViewModel : ViewModel() {
     fun userClickedRestartButton(view: View?) {
         startVisible()
         gameService.restart()
-        _gameState.value = gameService.state
+        _gameState.postValue(gameService.state)
+        _correct.postValue(emptyList())
         setAverage()
     }
 
     private fun startVisible() {
         _startVisibility.postValue(View.VISIBLE)
+        _averageVisibility.postValue(View.VISIBLE)
+        _errorVisibility.postValue(View.GONE)
         _waitVisibility.postValue(View.GONE)
         _stopVisibility.postValue(View.GONE)
         _restartVisibility.postValue(View.GONE)
+        _finished.postValue(false)
     }
 
     private fun waitVisible() {
         _waitVisibility.postValue(View.VISIBLE)
+        _averageVisibility.postValue(View.VISIBLE)
+        _errorVisibility.postValue(View.GONE)
         _stopVisibility.postValue(View.GONE)
         _startVisibility.postValue(View.GONE)
         _restartVisibility.postValue(View.GONE)
@@ -108,6 +148,8 @@ class GameViewModel : ViewModel() {
 
     private fun stopVisible() {
         _stopVisibility.postValue(View.VISIBLE)
+        _averageVisibility.postValue(View.VISIBLE)
+        _errorVisibility.postValue(View.GONE)
         _waitVisibility.postValue(View.GONE)
         _startVisibility.postValue(View.GONE)
         _restartVisibility.postValue(View.GONE)

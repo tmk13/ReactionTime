@@ -46,6 +46,7 @@
             <TextView
                 android:id="@+id/time1Label"
                 style="@style/TimeTextView"
+                android:textColor="@{viewModel.correct[0] ? @color/green : @color/red}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -59,6 +60,7 @@
             <TextView
                 android:id="@+id/time1Text"
                 style="@style/TimeTextView"
+                android:textColor="@{viewModel.correct[0] ? @color/green : @color/red}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.state[1]}"
@@ -70,6 +72,7 @@
             <TextView
                 android:id="@+id/time2Label"
                 style="@style/TimeTextView"
+                android:textColor="@{viewModel.correct[1] ? @color/green : @color/red}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -83,6 +86,7 @@
             <TextView
                 android:id="@+id/time2Text"
                 style="@style/TimeTextView"
+                android:textColor="@{viewModel.correct[1] ? @color/green : @color/red}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.state[2]}"
@@ -94,6 +98,7 @@
             <TextView
                 android:id="@+id/time3Label"
                 style="@style/TimeTextView"
+                android:textColor="@{viewModel.correct[2] ? @color/green : @color/red}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -107,6 +112,7 @@
             <TextView
                 android:id="@+id/time3Text"
                 style="@style/TimeTextView"
+                android:textColor="@{viewModel.correct[2] ? @color/green : @color/red}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.state[3]}"
@@ -118,6 +124,7 @@
             <TextView
                 android:id="@+id/time4Label"
                 style="@style/TimeTextView"
+                android:textColor="@{viewModel.correct[3] ? @color/green : @color/red}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -131,6 +138,7 @@
             <TextView
                 android:id="@+id/time4Text"
                 style="@style/TimeTextView"
+                android:textColor="@{viewModel.correct[3] ? @color/green : @color/red}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.state[4]}"
@@ -142,6 +150,7 @@
             <TextView
                 android:id="@+id/time5Label"
                 style="@style/TimeTextView"
+                android:textColor="@{viewModel.correct[4] ? @color/green : @color/red}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -155,6 +164,7 @@
             <TextView
                 android:id="@+id/time5Text"
                 style="@style/TimeTextView"
+                android:textColor="@{viewModel.correct[4] ? @color/green : @color/red}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{viewModel.state[5]}"
@@ -165,7 +175,9 @@
 
             <TextView
                 android:id="@+id/averageLabel"
+                android:visibility="@{viewModel.averageVisibility, default=visible}"
                 style="@style/TimeTextView"
+                android:textColor="@{viewModel.finished ? @color/green : @color/red}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -176,7 +188,9 @@
 
             <TextView
                 android:id="@+id/averageText"
+                android:visibility="@{viewModel.averageVisibility, default=visible}"
                 style="@style/TimeTextView"
+                android:textColor="@{viewModel.finished ? @color/green : @color/red}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toTopOf="@+id/averageLabel"
@@ -184,6 +198,21 @@
                 app:layout_constraintTop_toBottomOf="@+id/averageLabel"
                 tools:text="347"
                 android:text="@{viewModel.average}"/>
+
+            <TextView
+                android:id="@+id/error"
+                style="@style/TimeTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:visibility="@{viewModel.errorVisibility, default=gone}"
+                app:layout_constraintBottom_toTopOf="@+id/guidelineCenterHorizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@string/error"
+                tools:text="Too quickly!" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineCenterHorizontal"
@@ -218,7 +247,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:onClick="@{viewModel::userClickedStartButton}"
+                android:onClick="@{viewModel::userClickedWaitButton}"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

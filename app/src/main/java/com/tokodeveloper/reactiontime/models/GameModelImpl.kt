@@ -9,7 +9,7 @@ class GameModelImpl(private val minimumTime: Long) : GameModel {
 
     private val rand = Random()
 
-    private val _gameState = hashMapOf<Int, String>()
+    private val _gameState = linkedMapOf<Int, String>()
     private var _currentTimeId = 0
     private var _startTime = 0L
     private var _average = 0
@@ -47,13 +47,18 @@ class GameModelImpl(private val minimumTime: Long) : GameModel {
             stopTime >= minimumTime -> {
                 _gameState += ++_currentTimeId to stopTime.toString()
                 computeAverage()
-                callback(Success(stopTime, _gameState.size == 5))
+                checkFinished()
+                callback(Success(stopTime))
             }
             else -> {
-                resetState()
+                _gameState += ++_currentTimeId to stopTime.toString() + "!"
                 callback(Error())
             }
         }
+    }
+
+    private fun checkFinished() {
+        _finished = _gameState.size == 5
     }
 
     private fun computeAverage() {

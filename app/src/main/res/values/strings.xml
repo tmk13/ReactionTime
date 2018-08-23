@@ -15,4 +15,5 @@
     <string name="time_3">Time 3:</string>
     <string name="time_4">Time 4:</string>
     <string name="time_5">Time 5:</string>
+    <string name="error">Too quickly!</string>
 </resources>
