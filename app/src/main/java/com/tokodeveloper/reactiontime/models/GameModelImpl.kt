@@ -8,6 +8,7 @@ class GameModelImpl(private val minimumTime: Long) : GameModel {
     private val TAG = "GameModelImpl"
 
     private val rand = Random()
+    private var timer = Timer()
 
     private val _gameState = linkedMapOf<Int, String>()
     private var _currentTimeId = 0
@@ -33,7 +34,8 @@ class GameModelImpl(private val minimumTime: Long) : GameModel {
         _activated = false
 
         val randomTime = (((rand.nextInt(2) + rand.nextFloat()) + 2) * 1_000).toLong()
-        Timer().schedule(timerTask {
+        timer = Timer()
+        timer.schedule(timerTask {
             _startTime = System.nanoTime()
             _activated = true
             callback(_activated)
@@ -67,6 +69,7 @@ class GameModelImpl(private val minimumTime: Long) : GameModel {
     }
 
     override fun restart() {
+        timer.cancel()
         resetState()
     }
 
