@@ -15,17 +15,18 @@ buildscript {
         gradleVersion = '3.2.0-beta05'
         gsonVersion = '2.8.2'
         junitVersion = '4.12'
-        lifecycleVersion = '1.1.1'
-        navigationVersion = '1.0.0-alpha04'
+        lifecycleVersion = '2.0.0-rc01'
+        navigationVersion = '1.0.0-alpha05'
         kotlinVersion = '1.2.60'
         ktlintVersion = '0.24.0'
-        ktxVersion = '1.0.0-alpha1'
+        ktxVersion = '1.0.0-rc02'
         roomVersion = '1.1.1'
-        runnerVersion = '1.0.1'
+        runnerVersion = '1.1.0-alpha4'
         supportLibraryVersion = '28.0.0-rc01'
         workVersion = '1.0.0-alpha06'
         safeArgsVersion = '1.0.0-alpha05'
-        appCompatVersion = '1.0.0-rc01'
+        appCompatVersion = '1.0.0-rc02'
+        legacyVersion = '1.0.0-rc02'
     }
 
     repositories {
