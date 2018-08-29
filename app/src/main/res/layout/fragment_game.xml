@@ -7,7 +7,7 @@
 
         <variable
             name="viewModel"
-            type="com.tokodeveloper.reactiontime.viewmodels.GameViewModel" />
+            type="com.tokodeveloper.reaction_time.viewmodels.GameViewModel" />
     </data>
 
 

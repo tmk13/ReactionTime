@@ -1,4 +1,4 @@
-package com.tokodeveloper.reactiontime
+package com.tokodeveloper.reaction_time
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

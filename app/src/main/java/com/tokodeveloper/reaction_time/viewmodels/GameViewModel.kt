@@ -1,14 +1,14 @@
-package com.tokodeveloper.reactiontime.viewmodels
+package com.tokodeveloper.reaction_time.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.tokodeveloper.reactiontime.models.Error
-import com.tokodeveloper.reactiontime.models.GameModelImpl
-import com.tokodeveloper.reactiontime.models.Result
-import com.tokodeveloper.reactiontime.services.GameService
-import com.tokodeveloper.reactiontime.services.GameServiceImpl
+import com.tokodeveloper.reaction_time.models.Error
+import com.tokodeveloper.reaction_time.models.GameModelImpl
+import com.tokodeveloper.reaction_time.models.Result
+import com.tokodeveloper.reaction_time.services.GameService
+import com.tokodeveloper.reaction_time.services.GameServiceImpl
 
 class GameViewModel : ViewModel() {
 

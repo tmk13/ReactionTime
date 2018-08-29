@@ -1,6 +1,6 @@
-package com.tokodeveloper.reactiontime.services
+package com.tokodeveloper.reaction_time.services
 
-import com.tokodeveloper.reactiontime.models.Result
+import com.tokodeveloper.reaction_time.models.Result
 
 interface GameService {
     fun start(callback: (Boolean) -> Unit)

@@ -1,4 +1,4 @@
-package com.tokodeveloper.reactiontime.viewmodels
+package com.tokodeveloper.reaction_time.viewmodels
 
 import android.view.View
 import androidx.lifecycle.LiveData

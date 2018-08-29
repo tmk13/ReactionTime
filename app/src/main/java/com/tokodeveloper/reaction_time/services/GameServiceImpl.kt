@@ -1,7 +1,7 @@
-package com.tokodeveloper.reactiontime.services
+package com.tokodeveloper.reaction_time.services
 
-import com.tokodeveloper.reactiontime.models.GameModel
-import com.tokodeveloper.reactiontime.models.Result
+import com.tokodeveloper.reaction_time.models.GameModel
+import com.tokodeveloper.reaction_time.models.Result
 
 class GameServiceImpl(private val gameModel: GameModel) : GameService {
 

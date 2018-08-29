@@ -1,4 +1,4 @@
-package com.tokodeveloper.reactiontime
+package com.tokodeveloper.reaction_time
 
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.click

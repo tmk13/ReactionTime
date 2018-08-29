@@ -1,4 +1,4 @@
-package com.tokodeveloper.reactiontime.models
+package com.tokodeveloper.reaction_time.models
 
 interface GameModel {
     fun start(callback: (Boolean) -> Unit)

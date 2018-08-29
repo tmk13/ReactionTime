@@ -1,4 +1,4 @@
-package com.tokodeveloper.reactiontime.viewmodels
+package com.tokodeveloper.reaction_time.viewmodels
 
 /**
  * Used as a wrapper for data that is exposed via a LiveData that represents an event.

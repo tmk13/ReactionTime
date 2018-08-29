@@ -1,4 +1,4 @@
-package com.tokodeveloper.reactiontime.util
+package com.tokodeveloper.reaction_time.util
 
 import android.view.View
 import android.view.View.GONE

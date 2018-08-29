@@ -1,4 +1,4 @@
-package com.tokodeveloper.reactiontime
+package com.tokodeveloper.reaction_time
 
 import android.os.Bundle
 import android.view.*
@@ -7,8 +7,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
-import com.tokodeveloper.reactiontime.databinding.FragmentMainMenuBinding
-import com.tokodeveloper.reactiontime.viewmodels.MainMenuViewModel
+import com.tokodeveloper.reaction_time.databinding.FragmentMainMenuBinding
+import com.tokodeveloper.reaction_time.viewmodels.MainMenuViewModel
 
 
 class MainMenuFragment : Fragment() {

@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.tokodeveloper.reactiontime.viewmodels.MainMenuViewModel" />
+            type="com.tokodeveloper.reaction_time.viewmodels.MainMenuViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
