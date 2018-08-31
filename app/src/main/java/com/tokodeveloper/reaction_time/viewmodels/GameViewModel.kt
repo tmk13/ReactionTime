@@ -1,5 +1,6 @@
 package com.tokodeveloper.reaction_time.viewmodels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -61,6 +62,7 @@ class GameViewModel : ViewModel() {
     }
 
     fun userClickedStartButton() {
+        _finished.postValue(false)
         waitVisible()
         gameService.start {
             stopVisible()
@@ -104,17 +106,18 @@ class GameViewModel : ViewModel() {
     private fun checkFinished() {
         val fin = gameService.finished
         if (fin) {
-            _finished.postValue(fin)
+            _finished.value = fin
             restartVisible()
         }
     }
 
     private fun setAverage() {
         val average = gameService.average
+        Log.d(TAG, "average = $average")
         if (average > 0) {
-            _average.postValue(average.toString())
+            _average.value = average.toString()
         } else {
-            _average.postValue("")
+            _average.value = ""
         }
     }
 
@@ -123,6 +126,7 @@ class GameViewModel : ViewModel() {
         gameService.restart()
         _gameState.postValue(gameService.state)
         _correct.postValue(emptyList())
+        _finished.postValue(false)
         setAverage()
     }
 
@@ -132,7 +136,6 @@ class GameViewModel : ViewModel() {
         _waitVisible.postValue(false)
         _stopVisible.postValue(false)
         _restartVisible.postValue(false)
-        _finished.postValue(false)
         _showError.postValue(false)
     }
 

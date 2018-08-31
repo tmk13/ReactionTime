@@ -1,21 +1,34 @@
 package com.tokodeveloper.reaction_time
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.games.Games
 import com.tokodeveloper.reaction_time.databinding.FragmentGameBinding
 import com.tokodeveloper.reaction_time.viewmodels.GameViewModel
+import kotlinx.android.synthetic.main.fragment_game.*
 
 
 class GameFragment : Fragment() {
 
+    private lateinit var gameViewModel: GameViewModel
+
+    companion object {
+        private const val TAG = "GameFragment"
+        private const val HIGH_FAKE_SCORE = 999
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val gameViewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
+        gameViewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
         val binding = FragmentGameBinding.inflate(inflater, container, false).apply {
             viewModel = gameViewModel
             setLifecycleOwner(this@GameFragment)
@@ -24,4 +37,73 @@ class GameFragment : Fragment() {
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        gameViewModel.finished.observe(requireActivity(), Observer {
+            if (it) {
+                averageLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.green))
+                averageText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.green))
+                gameViewModel.average.value?.toLong()?.let {
+                    Log.d(TAG, "average = $it")
+                    submitScoreToLeaderboard(it)
+                    checkAchievements(it)
+                }
+            } else {
+                Log.d(TAG, "setColor red")
+                averageLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.red))
+                averageText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.red))
+            }
+        })
+    }
+
+    private fun submitScoreToLeaderboard(score: Long) {
+        if (isSignedIn()) {
+            val leaderboardsClient = Games.getLeaderboardsClient(requireActivity(), GoogleSignIn.getLastSignedInAccount(requireActivity())!!)
+            leaderboardsClient?.submitScore(getString(R.string.leaderboard_average_of_5), score)
+        }
+    }
+
+    private fun checkAchievements(score: Long) {
+        if (isSignedIn()) {
+            when {
+                score < 500 -> {
+                    Games.getAchievementsClient(requireActivity(), GoogleSignIn.getLastSignedInAccount(requireActivity())!!)
+                            .unlock(getString(R.string.achievement_below_500))
+                }
+                score < 450 -> {
+                    Games.getAchievementsClient(requireActivity(), GoogleSignIn.getLastSignedInAccount(requireActivity())!!)
+                            .unlock(getString(R.string.achievement_below_450))
+                }
+                score < 400 -> {
+                    Games.getAchievementsClient(requireActivity(), GoogleSignIn.getLastSignedInAccount(requireActivity())!!)
+                            .unlock(getString(R.string.achievement_below_400))
+                }
+                score < 375 -> {
+                    Games.getAchievementsClient(requireActivity(), GoogleSignIn.getLastSignedInAccount(requireActivity())!!)
+                            .unlock(getString(R.string.achievement_below_375))
+                }
+                score < 350 -> {
+                    Games.getAchievementsClient(requireActivity(), GoogleSignIn.getLastSignedInAccount(requireActivity())!!)
+                            .unlock(getString(R.string.achievement_below_350))
+                }
+                score < 325 -> {
+                    Games.getAchievementsClient(requireActivity(), GoogleSignIn.getLastSignedInAccount(requireActivity())!!)
+                            .unlock(getString(R.string.achievement_below_325))
+                }
+                score < 300 -> {
+                    Games.getAchievementsClient(requireActivity(), GoogleSignIn.getLastSignedInAccount(requireActivity())!!)
+                            .unlock(getString(R.string.achievement_below_300))
+                }
+                score < 275 -> {
+                    Games.getAchievementsClient(requireActivity(), GoogleSignIn.getLastSignedInAccount(requireActivity())!!)
+                            .unlock(getString(R.string.achievement_below_275))
+                }
+            }
+        }
+    }
+
+    private fun isSignedIn(): Boolean {
+        return GoogleSignIn.getLastSignedInAccount(requireActivity()) != null
+    }
 }

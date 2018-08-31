@@ -24,15 +24,22 @@ import kotlinx.android.synthetic.main.fragment_main_menu.*
 
 class MainMenuFragment : Fragment() {
 
-    private val RC_SIGN_IN = 9001
-    private val REQUEST_LEADERBOARDS = 8000
-    private val REQUEST_ACHIEVEMENTS = 8001
-    private val GOOGLE_API_ERROR = 10001
-
     private lateinit var signedInAccount: GoogleSignInAccount
 
     private lateinit var menu: Menu
     private lateinit var snackbar: Snackbar
+
+    companion object {
+        private const val RC_SIGN_IN = 9001
+        private const val REQUEST_LEADERBOARDS = 8000
+        private const val REQUEST_ACHIEVEMENTS = 8001
+        private const val GOOGLE_API_ERROR = 10001
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        startSignInIntent()
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -70,6 +77,12 @@ class MainMenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (isSignedIn()) {
+            signInButton.visibility = View.GONE
+        } else {
+            signInButton.visibility = View.VISIBLE
+        }
+
         signInButton.setOnClickListener { startSignInIntent() }
         configureSnackbar()
     }
@@ -77,6 +90,13 @@ class MainMenuFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_main_menu, menu)
         this.menu = menu!!
+
+        if (isSignedIn()) {
+            setSingOutMenuVisibility(true)
+        } else {
+            setSingOutMenuVisibility(false)
+        }
+
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -92,11 +112,6 @@ class MainMenuFragment : Fragment() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        startSignInIntent()
     }
 
     private fun startSignInIntent() {

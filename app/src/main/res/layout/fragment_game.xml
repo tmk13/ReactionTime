@@ -176,7 +176,7 @@
             <TextView
                 android:id="@+id/averageLabel"
                 style="@style/TimeTextView"
-                android:textColor="@{safeUnbox(viewModel.finished) ? @color/green : @color/red}"
+                android:textColor="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -189,7 +189,7 @@
             <TextView
                 android:id="@+id/averageText"
                 style="@style/TimeTextView"
-                android:textColor="@{safeUnbox(viewModel.finished) ? @color/green : @color/red}"
+                android:textColor="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:goneUnless="@{safeUnbox(viewModel.showAverage)}"
@@ -202,6 +202,7 @@
             <TextView
                 android:id="@+id/error"
                 style="@style/TimeTextView"
+                android:textColor="@color/red"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
