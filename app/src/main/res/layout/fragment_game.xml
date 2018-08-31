@@ -13,7 +13,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark">
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guidelineLeft"
@@ -226,7 +227,8 @@
                 android:id="@+id/start"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@android:color/white"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:onClick="@{() -> viewModel.userClickedStartButton()}"
                 android:text="@string/start"
                 android:textSize="20sp"
@@ -268,7 +270,8 @@
                 android:id="@+id/restart"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:background="@android:color/white"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:onClick="@{() -> viewModel.userClickedRestartButton()}"
                 android:text="@string/restart"
                 android:textSize="20sp"
