@@ -20,7 +20,7 @@ class MainMenuFragmentTest {
 
     @Test
     fun jumpToGameFragment() {
-        onView(withId(R.id.start_game)).perform(click())
+        onView(withId(R.id.startGame)).perform(click())
         onView(withId(R.id.start)).check(matches(isDisplayed()))
     }
 }

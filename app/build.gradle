@@ -36,7 +36,12 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "androidx.legacy:legacy-support-v4:$rootProject.legacyVersion"
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
-    implementation "com.google.android.gms:play-services-auth:$rootProject.googleLogin"
+
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+
+    implementation "com.google.android.gms:play-services-auth:$rootProject.googleLoginVersion"
+    implementation "com.google.android.gms:play-services-games:$rootProject.googleGamesVersion"
+
     testImplementation "junit:junit:$rootProject.junitVersion"
     androidTestImplementation "androidx.test:runner:$rootProject.runnerVersion"
     androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"

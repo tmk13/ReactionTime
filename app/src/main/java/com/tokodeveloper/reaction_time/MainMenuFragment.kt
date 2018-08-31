@@ -1,17 +1,38 @@
 package com.tokodeveloper.reaction_time
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
+import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.GoogleApiAvailability
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.games.Games
+import com.google.android.material.snackbar.Snackbar
 import com.tokodeveloper.reaction_time.databinding.FragmentMainMenuBinding
 import com.tokodeveloper.reaction_time.viewmodels.MainMenuViewModel
+import kotlinx.android.synthetic.main.fragment_main_menu.*
 
 
 class MainMenuFragment : Fragment() {
+
+    private val RC_SIGN_IN = 9001
+    private val REQUEST_LEADERBOARDS = 8000
+    private val REQUEST_ACHIEVEMENTS = 8001
+    private val GOOGLE_API_ERROR = 10001
+
+    private lateinit var signedInAccount: GoogleSignInAccount
+
+    private lateinit var menu: Menu
+    private lateinit var snackbar: Snackbar
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -19,7 +40,7 @@ class MainMenuFragment : Fragment() {
         val mainMenuViewModel = ViewModelProviders.of(this).get(MainMenuViewModel::class.java)
 
         val binding = DataBindingUtil.inflate<FragmentMainMenuBinding>(
-                layoutInflater, R.layout.fragment_main_menu, container, false).apply { 
+                layoutInflater, R.layout.fragment_main_menu, container, false).apply {
             viewModel = mainMenuViewModel
             setLifecycleOwner(this@MainMenuFragment)
         }
@@ -27,16 +48,35 @@ class MainMenuFragment : Fragment() {
         mainMenuViewModel.startGame.observe(this, Observer {
             it.getContentIfNotHandled()?.let {
                 val direction = MainMenuFragmentDirections.ActionMainMenuFragmentToGameFragment()
-                it.findNavController().navigate(direction)
+                this@MainMenuFragment.requireActivity().findNavController(R.id.startGame).navigate(direction)
             }
         })
+        mainMenuViewModel.leaderboard.observe(this, Observer {
+            it.getContentIfNotHandled()?.let {
+                leaderboards()
+            }
+        })
+        mainMenuViewModel.achievements.observe(this, Observer {
+            it.getContentIfNotHandled()?.let {
+                achievements()
+            }
+        })
+
         setHasOptionsMenu(true)
 
         return binding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        signInButton.setOnClickListener { startSignInIntent() }
+        configureSnackbar()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         inflater?.inflate(R.menu.menu_main_menu, menu)
+        this.menu = menu!!
         super.onCreateOptionsMenu(menu, inflater)
     }
 
@@ -46,7 +86,110 @@ class MainMenuFragment : Fragment() {
                 // TODO
                 return true
             }
+            R.id.signOut -> {
+                signOut()
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        startSignInIntent()
+    }
+
+    private fun startSignInIntent() {
+        val signInClient = GoogleSignIn.getClient(requireActivity(),
+                GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
+        val intent = signInClient.signInIntent
+        if (intent.resolveActivity(requireActivity().packageManager) != null) {
+            startActivityForResult(intent, RC_SIGN_IN)
+        }
+    }
+
+    override fun onActivityResult(request: Int, response: Int, data: Intent?) {
+        super.onActivityResult(request, response, data)
+
+        if (request == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+
+            try {
+                signedInAccount = task.getResult(ApiException::class.java)
+                signInButton.visibility = View.GONE
+                setSingOutMenuVisibility(true)
+            } catch (apiException: ApiException) {
+                GoogleApiAvailability.getInstance().getErrorDialog(requireActivity(), apiException.statusCode, GOOGLE_API_ERROR).show()
+            }
+        }
+    }
+
+    fun leaderboards() {
+        if (isSignedIn()) {
+            Games.getLeaderboardsClient(requireActivity(), GoogleSignIn.getLastSignedInAccount(requireActivity())!!)
+                    .getLeaderboardIntent(getString(R.string.leaderboard_average_of_5))
+                    .addOnSuccessListener { intent ->
+                        if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                            startActivityForResult(intent, REQUEST_LEADERBOARDS)
+                        }
+                    }
+        } else {
+            showNotConnectedSnackbar()
+        }
+    }
+
+    fun achievements() {
+        if (isSignedIn()) {
+            Games.getAchievementsClient(requireActivity(), GoogleSignIn.getLastSignedInAccount(requireActivity())!!)
+                    .achievementsIntent
+                    .addOnSuccessListener { intent ->
+                        if (intent.resolveActivity(requireActivity().packageManager) != null) {
+                            startActivityForResult(intent, REQUEST_ACHIEVEMENTS)
+                        }
+                    }
+        } else {
+            showNotConnectedSnackbar()
+        }
+    }
+
+    private fun showNotConnectedSnackbar() {
+        snackbar.show()
+    }
+
+    private fun isSignedIn(): Boolean {
+        return GoogleSignIn.getLastSignedInAccount(requireActivity()) != null
+    }
+
+    private fun signOut() {
+        if (isSignedIn()) {
+            val signInClient = GoogleSignIn.getClient(requireActivity(),
+                    GoogleSignInOptions.DEFAULT_GAMES_SIGN_IN)
+
+            signInClient.signOut().addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    signInButton.visibility = View.VISIBLE
+                    setSingOutMenuVisibility(false)
+                } else {
+
+                }
+            }
+        } else {
+            showNotConnectedSnackbar()
+        }
+    }
+
+    private fun setSingOutMenuVisibility(visible: Boolean) {
+        menu.findItem(R.id.signOut).isVisible = visible
+    }
+
+    private fun configureSnackbar() {
+        snackbar = Snackbar.make(mainLayout, R.string.notConnected, Snackbar.LENGTH_LONG)
+        val snackbarView = snackbar.view
+        val textView = snackbarView.findViewById<TextView>(com.google.android.material.R.id.snackbar_text)
+        textView.isAllCaps = true
+        textView.textSize = 20f
+        textView.textAlignment = View.TEXT_ALIGNMENT_CENTER
+        textView.setTextColor(ContextCompat.getColor(requireActivity(), R.color.red))
+        snackbarView.setBackgroundColor(ContextCompat.getColor(requireActivity(), R.color.white))
     }
 }

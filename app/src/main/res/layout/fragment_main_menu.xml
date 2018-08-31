@@ -10,14 +10,25 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
         tools:context=".MainMenuFragment">
 
-        <Button
-            android:id="@+id/start_game"
+        <com.google.android.gms.common.SignInButton
+            android:id="@+id/signInButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/startGame"
+            style="@style/MenuButtonStyle"
+            android:background="@drawable/menu_button"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="32dp"
@@ -25,12 +36,12 @@
             app:layout_constraintBottom_toTopOf="@+id/leaderboard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:onClick="@{viewModel::userClicksStartGameButton}"/>
+            android:onClick="@{() -> viewModel.userClickedStartGameButton()}"/>
 
         <Button
             android:id="@+id/leaderboard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/MenuButtonStyle"
+            android:background="@drawable/menu_button"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
@@ -39,18 +50,20 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:onClick="@{() -> viewModel.userClickedLeaderboardButton()}"/>
 
         <Button
             android:id="@+id/achievements"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/MenuButtonStyle"
+            android:background="@drawable/menu_button"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="8dp"
             android:text="@string/achievements"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/leaderboard" />
+            app:layout_constraintTop_toBottomOf="@+id/leaderboard"
+            android:onClick="@{() -> viewModel.userClickedAchievementsButton()}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -1,16 +1,27 @@
 package com.tokodeveloper.reaction_time.viewmodels
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModel
 
 class MainMenuViewModel : ViewModel() {
-    private val _startGame = MutableLiveData<Event<View>>()
+    private val _startGame = MutableLiveData<Event<Boolean>>()
+    private val _leaderboard = MutableLiveData<Event<Boolean>>()
+    private val _achievements = MutableLiveData<Event<Boolean>>()
 
-    val startGame: LiveData<Event<View>> = _startGame
+    val startGame: LiveData<Event<Boolean>> = _startGame
+    val leaderboard: LiveData<Event<Boolean>> = _leaderboard
+    val achievements: LiveData<Event<Boolean>> = _achievements
 
-    fun userClicksStartGameButton(view: View?) {
-        _startGame.value = Event(view!!)
+    fun userClickedStartGameButton() {
+        _startGame.value = Event(true)
+    }
+
+    fun userClickedLeaderboardButton() {
+        _leaderboard.value = Event(true)
+    }
+
+    fun userClickedAchievementsButton() {
+        _achievements.value = Event(true)
     }
 }
