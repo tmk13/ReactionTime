@@ -1,5 +1,6 @@
 package com.tokodeveloper.reaction_time
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -8,27 +9,32 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.games.Games
 import com.tokodeveloper.reaction_time.databinding.FragmentGameBinding
+import com.tokodeveloper.reaction_time.util.viewModelProvider
 import com.tokodeveloper.reaction_time.viewmodels.GameViewModel
+import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_game.*
+import javax.inject.Inject
 
 
 class GameFragment : Fragment() {
+
+    @Inject
+    lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private lateinit var gameViewModel: GameViewModel
 
     companion object {
         private const val TAG = "GameFragment"
-        private const val HIGH_FAKE_SCORE = 999
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        gameViewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
+        gameViewModel = viewModelProvider(viewModelFactory)
         val binding = FragmentGameBinding.inflate(inflater, container, false).apply {
             viewModel = gameViewModel
             setLifecycleOwner(this@GameFragment)
@@ -55,6 +61,11 @@ class GameFragment : Fragment() {
                 averageText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.red))
             }
         })
+    }
+
+    override fun onAttach(context: Context?) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
     }
 
     private fun submitScoreToLeaderboard(score: Long) {

@@ -1,9 +1,12 @@
 package com.tokodeveloper.reaction_time.models
 
 import java.util.*
+import javax.inject.Inject
+import javax.inject.Singleton
 import kotlin.concurrent.timerTask
 
-class GameModelImpl(private val minimumTime: Long) : GameModel {
+@Singleton
+class GameModelImpl @Inject constructor(private val minimumTime: Long) : GameModel {
 
     private val TAG = "GameModelImpl"
 

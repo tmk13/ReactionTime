@@ -2,8 +2,11 @@ package com.tokodeveloper.reaction_time.services
 
 import com.tokodeveloper.reaction_time.models.GameModel
 import com.tokodeveloper.reaction_time.models.Result
+import javax.inject.Inject
+import javax.inject.Singleton
 
-class GameServiceImpl(private val gameModel: GameModel) : GameService {
+@Singleton
+class GameServiceImpl @Inject constructor(private val gameModel: GameModel) : GameService {
 
     override val state: HashMap<Int, String>
         get() = gameModel.state

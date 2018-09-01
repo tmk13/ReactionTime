@@ -6,16 +6,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.tokodeveloper.reaction_time.models.Error
-import com.tokodeveloper.reaction_time.models.GameModelImpl
 import com.tokodeveloper.reaction_time.models.Result
 import com.tokodeveloper.reaction_time.services.GameService
-import com.tokodeveloper.reaction_time.services.GameServiceImpl
+import javax.inject.Inject
 
-class GameViewModel : ViewModel() {
+class GameViewModel @Inject constructor(private val gameService: GameService) : ViewModel() {
 
     private val TAG = "GameViewModel"
 
-    private val gameService: GameService = GameServiceImpl(GameModelImpl(200))
+//    @Inject
+//    private lateinit var gameService: GameService
 
     private var _result = MutableLiveData<Result>()
     private var _gameState = MutableLiveData<HashMap<Int, String>>()
