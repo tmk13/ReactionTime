@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -102,12 +103,17 @@ class MainMenuFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
-            R.id.consents -> {
-                // TODO
-                return true
-            }
             R.id.signOut -> {
                 signOut()
+                return true
+            }
+            R.id.history -> {
+                val direction = MainMenuFragmentDirections.ActionMainMenuFragmentToHistoryFragment()
+                findNavController().navigate(direction)
+                return true
+            }
+            R.id.consents -> {
+                // TODO
                 return true
             }
             else -> super.onOptionsItemSelected(item)

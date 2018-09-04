@@ -31,7 +31,7 @@
     <string name="average">Average:</string>
     <string name="stop">Now!</string>
     <string name="restart">Restart</string>
-    <string name="wait">Wait for green...</string>
+    <string name="wait">Wait for green&#8230;</string>
     <string name="time_1">Time 1:</string>
     <string name="time_2">Time 2:</string>
     <string name="time_3">Time 3:</string>
@@ -41,4 +41,6 @@
 
     <string name="notConnected">Sign in first!</string>
     <string name="sign_out">Sign Out</string>
+    <string name="history">History</string>
+    <string name="dash">-</string>
 </resources>

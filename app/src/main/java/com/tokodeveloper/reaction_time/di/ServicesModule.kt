@@ -9,16 +9,16 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class AppModule {
+class ServicesModule {
 
     @Provides
     fun provideMinimumTime(): Long = 200
 
     @Singleton
     @Provides
-    fun provideGameModel(): GameModel = GameModelImpl(provideMinimumTime())
+    fun provideGameModel(minimumTime: Long): GameModel = GameModelImpl(minimumTime)
 
     @Singleton
     @Provides
-    fun provideGameService(): GameService = GameServiceImpl(provideGameModel())
+    fun provideGameService(gameModel: GameModel): GameService = GameServiceImpl(gameModel)
 }

@@ -1,6 +1,7 @@
 package com.tokodeveloper.reaction_time.di
 
 import com.tokodeveloper.reaction_time.GameFragment
+import com.tokodeveloper.reaction_time.HistoryFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -8,4 +9,7 @@ import dagger.android.ContributesAndroidInjector
 abstract class FragmentModule {
     @ContributesAndroidInjector
     internal abstract fun contributeGameFragment(): GameFragment
+
+    @ContributesAndroidInjector
+    internal abstract fun contributeHistoryFragment(): HistoryFragment
 }

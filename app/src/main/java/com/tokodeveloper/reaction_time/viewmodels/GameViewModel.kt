@@ -1,6 +1,5 @@
 package com.tokodeveloper.reaction_time.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
@@ -13,9 +12,6 @@ import javax.inject.Inject
 class GameViewModel @Inject constructor(private val gameService: GameService) : ViewModel() {
 
     private val TAG = "GameViewModel"
-
-//    @Inject
-//    private lateinit var gameService: GameService
 
     private var _result = MutableLiveData<Result>()
     private var _gameState = MutableLiveData<HashMap<Int, String>>()
@@ -51,6 +47,8 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
     val restartVisible: LiveData<Boolean> = _restartVisible
 
     init {
+        gameService.restart()
+
         _startVisible.value = true
         _waitVisible.value = false
         _stopVisible.value = false
@@ -113,7 +111,6 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
 
     private fun setAverage() {
         val average = gameService.average
-        Log.d(TAG, "average = $average")
         if (average > 0) {
             _average.value = average.toString()
         } else {

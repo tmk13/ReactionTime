@@ -12,15 +12,23 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.games.Games
+import com.tokodeveloper.reaction_time.data.BestTime
+import com.tokodeveloper.reaction_time.data.BestTimeRepository
 import com.tokodeveloper.reaction_time.databinding.FragmentGameBinding
 import com.tokodeveloper.reaction_time.util.viewModelProvider
 import com.tokodeveloper.reaction_time.viewmodels.GameViewModel
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_game.*
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.launch
+import org.joda.time.DateTime
 import javax.inject.Inject
 
 
 class GameFragment : Fragment() {
+
+    @Inject
+    lateinit var bestTimeRepository: BestTimeRepository
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -51,9 +59,9 @@ class GameFragment : Fragment() {
                 averageLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.green))
                 averageText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.green))
                 gameViewModel.average.value?.toLong()?.let {
-                    Log.d(TAG, "average = $it")
                     submitScoreToLeaderboard(it)
                     checkAchievements(it)
+                    saveScoreToDatabase(it)
                 }
             } else {
                 Log.d(TAG, "setColor red")
@@ -110,6 +118,22 @@ class GameFragment : Fragment() {
                     Games.getAchievementsClient(requireActivity(), GoogleSignIn.getLastSignedInAccount(requireActivity())!!)
                             .unlock(getString(R.string.achievement_below_275))
                 }
+            }
+        }
+    }
+
+    private fun saveScoreToDatabase(score: Long) {
+        launch(CommonPool) {
+            val todayBestTime = bestTimeRepository.getBestTime(DateTime.now().withTimeAtStartOfDay())
+
+            if (todayBestTime != null) {
+                if (score < todayBestTime.bestTime) {
+                    val newBestTime = todayBestTime.copy(bestTime = score)
+                    bestTimeRepository.updateBestTime(newBestTime)
+                }
+            } else {
+                val newBestTime = BestTime(bestTime = score)
+                bestTimeRepository.saveBestTime(newBestTime)
             }
         }
     }
