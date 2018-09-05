@@ -6,14 +6,16 @@ import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import com.tokodeveloper.reaction_time.models.Error
 import com.tokodeveloper.reaction_time.models.Result
+import com.tokodeveloper.reaction_time.models.Success
 import com.tokodeveloper.reaction_time.services.GameService
+import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.experimental.android.UI
 import javax.inject.Inject
 
 class GameViewModel @Inject constructor(private val gameService: GameService) : ViewModel() {
 
-    private val TAG = "GameViewModel"
+    private var job: Job? = null
 
-    private var _result = MutableLiveData<Result>()
     private var _gameState = MutableLiveData<HashMap<Int, String>>()
     private var _correct = MutableLiveData<List<Boolean>>()
     private var _average = MutableLiveData<String>()
@@ -23,8 +25,6 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
     private var _waitVisible = MutableLiveData<Boolean>()
     private var _stopVisible = MutableLiveData<Boolean>()
     private var _restartVisible = MutableLiveData<Boolean>()
-
-    val result: LiveData<Result> = _result
 
     val state: LiveData<HashMap<Int, String>> = _gameState
 
@@ -47,7 +47,7 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
     val restartVisible: LiveData<Boolean> = _restartVisible
 
     init {
-        gameService.restart()
+        reset()
 
         _startVisible.value = true
         _waitVisible.value = false
@@ -59,16 +59,25 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
         correct = Transformations.map(_gameState) { it.values.map { !it.endsWith("!") } }
     }
 
+    companion object {
+        private const val TAG = "GameViewModel"
+    }
+
     fun userClickedStartButton() {
         _finished.postValue(false)
         waitVisible()
-        gameService.start {
-            stopVisible()
+
+        job = launch(CommonPool) {
+            gameService.start {
+                launch(UI) {
+                    stopVisible()
+                }
+            }
         }
     }
 
     fun userClickedWaitButton() {
-        gameService.restart()
+        reset()
         _gameState.postValue(gameService.state)
         showError()
         startVisible()
@@ -77,20 +86,22 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
     fun userClickedStopButton() {
         startVisible()
 
-        gameService.stop {
-            _result.value = it
-            _gameState.postValue(gameService.state)
-            checkError()
-            setAverage()
-            checkFinished()
+        launch(UI) {
+            val result = withContext(CommonPool) {
+                gameService.stop()
+            }
+            checkResult(result)
         }
     }
 
-    private fun checkError() {
-        when (_result.value) {
-            is Error -> showError()
-            else -> {
+    private fun checkResult(result: Result) {
+        when (result) {
+            is Success -> {
+                _gameState.postValue(gameService.state)
+                setAverage()
+                checkFinished()
             }
+            is Error -> showError()
         }
     }
 
@@ -120,11 +131,20 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
 
     fun userClickedRestartButton() {
         startVisible()
+        reset()
+        setAverage()
+    }
+
+    fun reset() {
+        launch(UI) {
+            if (job?.isActive == true) job?.cancelAndJoin()
+        }
         gameService.restart()
         _gameState.postValue(gameService.state)
         _correct.postValue(emptyList())
         _finished.postValue(false)
         setAverage()
+        startVisible()
     }
 
     private fun startVisible() {

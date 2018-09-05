@@ -45,7 +45,7 @@ class GameModelImpl @Inject constructor(private val minimumTime: Long) : GameMod
         }, randomTime)
     }
 
-    override fun stop(callback: (Result) -> Unit) {
+    override fun stop(): Result {
         val stopTime = (System.nanoTime() - _startTime) / 1_000_000
 
         return when {
@@ -53,11 +53,11 @@ class GameModelImpl @Inject constructor(private val minimumTime: Long) : GameMod
                 _gameState += ++_currentTimeId to stopTime.toString()
                 computeAverage()
                 checkFinished()
-                callback(Success(stopTime))
+                Success(stopTime)
             }
             else -> {
                 _gameState += ++_currentTimeId to stopTime.toString() + "!"
-                callback(Error())
+                Error()
             }
         }
     }

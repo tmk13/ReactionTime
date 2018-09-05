@@ -55,18 +55,20 @@ class GameFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         gameViewModel.finished.observe(requireActivity(), Observer {
-            if (it) {
-                averageLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.green))
-                averageText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.green))
-                gameViewModel.average.value?.toLong()?.let {
-                    submitScoreToLeaderboard(it)
-                    checkAchievements(it)
-                    saveScoreToDatabase(it)
+            if (isAdded) {
+                if (it) {
+                    averageLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.green))
+                    averageText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.green))
+                    gameViewModel.average.value?.toLong()?.let {
+                        submitScoreToLeaderboard(it)
+                        checkAchievements(it)
+                        saveScoreToDatabase(it)
+                    }
+                } else {
+                    Log.d(TAG, "setColor red")
+                    averageLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.red))
+                    averageText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.red))
                 }
-            } else {
-                Log.d(TAG, "setColor red")
-                averageLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.red))
-                averageText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.red))
             }
         })
     }
@@ -74,6 +76,11 @@ class GameFragment : Fragment() {
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        gameViewModel?.reset()
     }
 
     private fun submitScoreToLeaderboard(score: Long) {
