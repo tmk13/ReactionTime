@@ -1,18 +1,18 @@
 package com.tokodeveloper.reaction_time.viewmodels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.tokodeveloper.reaction_time.models.Error
 import com.tokodeveloper.reaction_time.models.Result
 import com.tokodeveloper.reaction_time.models.Success
 import com.tokodeveloper.reaction_time.services.GameService
-import kotlinx.coroutines.experimental.*
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.experimental.withContext
 import javax.inject.Inject
 
-class GameViewModel @Inject constructor(private val gameService: GameService) : ViewModel() {
+class GameViewModel @Inject constructor(private val gameService: GameService) : ViewModel(), LifecycleObserver {
 
     private var job: Job? = null
 
@@ -61,6 +61,17 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
 
     companion object {
         private const val TAG = "GameViewModel"
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun reset() {
+        job?.cancel()
+        gameService.restart()
+        _gameState.postValue(gameService.state)
+        _correct.postValue(emptyList())
+        _finished.postValue(false)
+        setAverage()
+        startVisible()
     }
 
     fun userClickedStartButton() {
@@ -133,18 +144,6 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
         startVisible()
         reset()
         setAverage()
-    }
-
-    fun reset() {
-        launch(UI) {
-            if (job?.isActive == true) job?.cancelAndJoin()
-        }
-        gameService.restart()
-        _gameState.postValue(gameService.state)
-        _correct.postValue(emptyList())
-        _finished.postValue(false)
-        setAverage()
-        startVisible()
     }
 
     private fun startVisible() {

@@ -43,6 +43,7 @@ class GameFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
 
         gameViewModel = viewModelProvider(viewModelFactory)
+        viewLifecycleOwner.lifecycle.addObserver(gameViewModel)
         val binding = FragmentGameBinding.inflate(inflater, container, false).apply {
             viewModel = gameViewModel
             setLifecycleOwner(this@GameFragment)
@@ -76,11 +77,6 @@ class GameFragment : Fragment() {
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this)
         super.onAttach(context)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        gameViewModel?.reset()
     }
 
     private fun submitScoreToLeaderboard(score: Long) {
