@@ -20,3 +20,13 @@ package com.tokodeveloper.reaction_time.util
  * Constants used throughout the app.
  */
 const val DATABASE_NAME = "reaction-time-db"
+
+const val RC_CONSENT = 1
+const val RC_RESTART = 2
+
+const val AGE_16 = "AGE_16"
+const val FIREBASE_STATISTICS = "FIREBASE_STATISTICS"
+const val FIREBASE_CRASH = "FIREBASE_CRASH"
+const val FIREBASE_MESSAGING = "FIREBASE_MESSAGING"
+const val ADMOB_PERSONALIZED = "ADMOB_PERSONALIZED"
+const val ADMOB_NON_PERSONALIZED = "ADMOB_NON_PERSONALIZED"

@@ -13,13 +13,14 @@
     <string name="achievement_below_275">CgkIzcu1if4XEAIQCQ</string>
     <string name="leaderboard_average_of_5">CgkIzcu1if4XEAIQCg</string>
 
-    <string name="banner_ad_unit_id">ca-app-pub-3463077628785956/8635354221</string>
-    <!--<string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>-->
-    <string name="cubot">C85A3DBC08B9EA7E01132C87732D0C75</string>
-    <string name="l65">0BCE0BED80EBC371D7DF1245A2397B3A</string>
-    <string name="J5">EEEDD10448642BDC2F1F8A1C4022C7CC</string>
-    <string name="M4">1BBAE243A475AFF62D78A7932221DCE4</string>
-    <string name="PHONEPAD">FE33364A10BFE2A98DA4E2556C859CB1</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="cubot"></string>
+    <string name="l65"></string>
+    <string name="J5"></string>
+    <string name="M4"></string>
+    <string name="PHONEPAD"></string>
+    <string name="G2Mini"></string>
 
     <string name="app_name">Reaction Time</string>
     <string name="start_game">Start Game</string>
@@ -43,4 +44,27 @@
     <string name="sign_out">Sign Out</string>
     <string name="history">History</string>
     <string name="dash">-</string>
+
+    <string name="ask_for_age">How old are you?</string>
+    <string name="age">Age</string>
+    <string name="what_age">You must be at least 16 years of age to use this App.</string>
+    <string name="why_age">Due to European regulations, you must be at least 16 years of age to use this App.</string>
+    <string name="statistics">Statistics</string>
+    <string name="analytics">Analytics</string>
+    <string name="what_statistics">Firebase stores your Mobile Ad ID, Android ID, Instance ID and Analytics App Instance IDs. ID specific data is deleted after 60 days.</string>
+    <string name="why_statistics">We send this information to Firebase in order that we can better understand our users, enabling us to create better Apps.</string>
+    <string name="crash_reporting">Crash reporting</string>
+    <string name="what_crash_reporting">Firebase stores your Instance ID and crash traces. Crash traces are deleted after 180 days.</string>
+    <string name="why_crash_reporting">We need this to learn how and when crashes are happening in our App.</string>
+    <string name="ads_personalized">Personalized ads</string>
+    <string name="ads">Ads</string>
+    <string name="what_ads_personalized">We show you personalized ads.</string>
+    <string name="why_ads_personalized">We need this to show you personalized ads using mobile identifier.</string>
+    <string name="ads_non_personalized">Non-personalized ads</string>
+    <string name="what_ads_non_personalized">We show you non-personalized ads.</string>
+    <string name="why_ads_non_personalized">We won\\\'t collect your data for personalized advertising. Although non-personalized ads don\\\'t use mobile ad identifiers for ad targeting, they do still use mobile identifiers for frequency capping and aggregated ad reporting as well as for combating fraud and abuse.</string>
+    <string name="messaging">Messaging</string>
+    <string name="what_messaging">We need this to send messages to our App</string>
+    <string name="why_messaging">We send messages through Firebase to show them in our App</string>
+    <string name="play">Play</string>
 </resources>

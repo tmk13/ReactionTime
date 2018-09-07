@@ -15,6 +15,7 @@ import com.google.android.gms.games.Games
 import com.tokodeveloper.reaction_time.data.BestTime
 import com.tokodeveloper.reaction_time.data.BestTimeRepository
 import com.tokodeveloper.reaction_time.databinding.FragmentGameBinding
+import com.tokodeveloper.reaction_time.util.showNonPersonalizedAds
 import com.tokodeveloper.reaction_time.util.viewModelProvider
 import com.tokodeveloper.reaction_time.viewmodels.GameViewModel
 import dagger.android.support.AndroidSupportInjection
@@ -72,6 +73,8 @@ class GameFragment : Fragment() {
                 }
             }
         })
+
+        showNonPersonalizedAds(requireActivity(), adView)
     }
 
     override fun onAttach(context: Context?) {

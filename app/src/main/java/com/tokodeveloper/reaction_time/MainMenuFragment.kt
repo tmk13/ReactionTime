@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
+import com.crashlytics.android.Crashlytics
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -18,8 +19,13 @@ import com.google.android.gms.common.GoogleApiAvailability
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.games.Games
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.firebase.messaging.FirebaseMessaging
 import com.tokodeveloper.reaction_time.databinding.FragmentMainMenuBinding
+import com.tokodeveloper.reaction_time.util.*
 import com.tokodeveloper.reaction_time.viewmodels.MainMenuViewModel
+import dae.gdprconsent.ConsentHelper
+import io.fabric.sdk.android.Fabric
 import kotlinx.android.synthetic.main.fragment_main_menu.*
 
 
@@ -39,7 +45,14 @@ class MainMenuFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        startSignInIntent()
+
+        if (ConsentHelper.hasNewOrRequired(requireActivity(), list(requireActivity()))) {
+            ConsentHelper.showGdprOnlyNew(requireActivity(), RC_CONSENT, list(requireActivity()))
+        } else {
+            if (!isSignedIn()) {
+                startSignInIntent()
+            }
+        }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -86,6 +99,27 @@ class MainMenuFragment : Fragment() {
 
         signInButton.setOnClickListener { startSignInIntent() }
         configureSnackbar()
+
+        val allowsPersonalAds = ConsentHelper.hasConsent(ADMOB_PERSONALIZED)
+        val allowsStatistics = ConsentHelper.hasConsent(FIREBASE_STATISTICS)
+        val allowsCrashReports = ConsentHelper.hasConsent(FIREBASE_CRASH)
+        val allowsMessaging = ConsentHelper.hasConsent(FIREBASE_MESSAGING)
+
+        if (allowsPersonalAds) {
+            showPersonalizedAds(requireActivity(), adView)
+        } else {
+            showNonPersonalizedAds(requireActivity(), adView)
+        }
+
+        FirebaseAnalytics.getInstance(requireActivity()).setAnalyticsCollectionEnabled(allowsStatistics)
+
+        if (allowsCrashReports) {
+            Fabric.with(requireActivity(), Crashlytics())
+        } else {
+            // change only on app restart
+        }
+
+        FirebaseMessaging.getInstance().isAutoInitEnabled = allowsMessaging
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -113,7 +147,7 @@ class MainMenuFragment : Fragment() {
                 return true
             }
             R.id.consents -> {
-                // TODO
+                ConsentHelper.showGdpr(requireActivity(), RC_CONSENT, list(requireContext()))
                 return true
             }
             else -> super.onOptionsItemSelected(item)

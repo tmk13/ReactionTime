@@ -9,12 +9,18 @@ buildscript {
         targetSdkVersion = 28
 
         // App dependencies
+        androidMaven = '2.1'
         appCompatVersion = '1.0.0-rc02'
+        bintrayVersion = '1.8.0'
         constraintLayoutVersion = '2.0.0-alpha2'
-        coroutinesVersion = '0.25.0'
+        coroutinesVersion = '0.25.3'
+        crashlyticsVersion = '2.9.5'
         dagger = "2.16"
         dataBindingVersion = '3.3.0-alpha08'
         espressoVersion = '3.1.0-alpha4'
+        firebaseAdsVersion = '15.0.1'
+        firebaseCoreVersion = '16.0.3'
+        firebaseMessagingVersion = '17.3.1'
         glideVersion = '4.4.0'
         googleGamesVersion = '15.0.1'
         googleLoginVersion = '16.0.0'
@@ -40,12 +46,15 @@ buildscript {
         google()
         mavenCentral()
         jcenter()
+        maven { url 'https://jitpack.io' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.0-rc02'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$safeArgsVersion"
         classpath "com.google.gms:google-services:$googleServicesVersion"
+        classpath "com.jfrog.bintray.gradle:gradle-bintray-plugin:$bintrayVersion"
+        classpath "com.github.dcendents:android-maven-gradle-plugin:$androidMaven"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files

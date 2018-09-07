@@ -3,6 +3,7 @@ package com.tokodeveloper.reaction_time
 import android.app.Application
 import androidx.fragment.app.Fragment
 import com.tokodeveloper.reaction_time.di.DaggerAppComponent
+import dae.gdprconsent.ConsentHelper
 import dagger.android.AndroidInjector
 import dagger.android.DispatchingAndroidInjector
 import dagger.android.support.HasSupportFragmentInjector
@@ -18,6 +19,7 @@ class App : Application(), HasSupportFragmentInjector {
         super.onCreate()
         initDagger()
         initJodaTime()
+        initGdprLibrary()
     }
 
     override fun supportFragmentInjector(): AndroidInjector<Fragment> {
@@ -34,5 +36,9 @@ class App : Application(), HasSupportFragmentInjector {
 
     private fun initJodaTime() {
         JodaTimeAndroid.init(this)
+    }
+
+    private fun initGdprLibrary() {
+        ConsentHelper.populate(this)
     }
 }
