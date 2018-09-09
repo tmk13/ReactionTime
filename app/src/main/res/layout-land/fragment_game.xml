@@ -46,14 +46,13 @@
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            ads:adSize="SMART_BANNER"
+            ads:adSize="BANNER"
             ads:adUnitId="@string/banner_ad_unit_id"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/guidelineCenter"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
 
         <TextView
             android:id="@+id/time1Label"
@@ -67,7 +66,7 @@
             android:textColor="@{safeUnbox(viewModel.correct[0]) ? @color/green : @color/red}"
             app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/guidelineTop" />
+            app:layout_constraintTop_toBottomOf="@+id/adView" />
 
         <TextView
             android:id="@+id/time1Text"
@@ -143,9 +142,9 @@
             android:layout_marginEnd="8dp"
             android:text="@string/time_4"
             android:textColor="@{safeUnbox(viewModel.correct[3]) ? @color/green : @color/red}"
-            app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-            app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
-            app:layout_constraintTop_toBottomOf="@+id/guidelineTop" />
+            app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/time3Label" />
 
         <TextView
             android:id="@+id/time4Text"
@@ -155,7 +154,7 @@
             android:text="@{viewModel.state[4]}"
             android:textColor="@{safeUnbox(viewModel.correct[3]) ? @color/green : @color/red}"
             app:layout_constraintBottom_toTopOf="@+id/time4Label"
-            app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@+id/time4Label"
             tools:text="426" />
 
@@ -169,8 +168,8 @@
             android:layout_marginEnd="8dp"
             android:text="@string/time_5"
             android:textColor="@{safeUnbox(viewModel.correct[4]) ? @color/green : @color/red}"
-            app:layout_constraintEnd_toStartOf="@+id/guidelineRight"
-            app:layout_constraintStart_toEndOf="@+id/guidelineCenter"
+            app:layout_constraintEnd_toStartOf="@+id/guidelineLeft"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/time4Label" />
 
         <TextView
@@ -181,7 +180,7 @@
             android:text="@{viewModel.state[5]}"
             android:textColor="@{safeUnbox(viewModel.correct[4]) ? @color/green : @color/red}"
             app:layout_constraintBottom_toTopOf="@+id/time5Label"
-            app:layout_constraintStart_toStartOf="@+id/guidelineRight"
+            app:layout_constraintStart_toStartOf="@+id/guidelineLeft"
             app:layout_constraintTop_toBottomOf="@+id/time5Label"
             tools:text="285" />
 
@@ -206,8 +205,8 @@
             android:text="@{viewModel.average}"
             android:textColor="@color/red"
             app:goneUnless="@{safeUnbox(viewModel.showAverage)}"
-            app:layout_constraintBottom_toTopOf="@+id/averageLabel"
-            app:layout_constraintStart_toStartOf="@+id/guidelineCenter"
+            app:layout_constraintEnd_toStartOf="@+id/averageLabel"
+            app:layout_constraintStart_toEndOf="@+id/averageLabel"
             app:layout_constraintTop_toBottomOf="@+id/averageLabel"
             tools:text="347" />
 
@@ -246,8 +245,8 @@
             app:goneUnless="@{safeUnbox(viewModel.startVisible)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guidelineCenterHorizontal" />
+            app:layout_constraintStart_toStartOf="@id/guidelineCenter"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/wait"
@@ -260,8 +259,8 @@
             app:goneUnless="@{safeUnbox(viewModel.waitVisible)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guidelineCenterHorizontal" />
+            app:layout_constraintStart_toStartOf="@id/guidelineCenter"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/stop"
@@ -274,8 +273,8 @@
             app:goneUnless="@{safeUnbox(viewModel.stopVisible)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guidelineCenterHorizontal" />
+            app:layout_constraintStart_toStartOf="@id/guidelineCenter"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/restart"
@@ -289,8 +288,8 @@
             app:goneUnless="@{safeUnbox(viewModel.restartVisible)}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guidelineCenterHorizontal" />
+            app:layout_constraintStart_toStartOf="@id/guidelineCenter"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
