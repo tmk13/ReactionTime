@@ -51,7 +51,7 @@ class MyTimeRecyclerViewAdapter(
     }
 
     inner class ViewHolder(val mView: View) : RecyclerView.ViewHolder(mView) {
-        val mIdView: TextView = mView.item_date
+        val mIdView: TextView = mView.itemDate
         val mContentView: TextView = mView.time
 
         override fun toString(): String {

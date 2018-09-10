@@ -1,32 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_centerInParent="true"
+    android:background="@color/primaryColor"
+    android:padding="16dp"
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/item_date"
+        android:id="@+id/itemDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:textAppearance="?attr/textAppearanceListItem"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/dash"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/dash"
+        app:layout_constraintTop_toBottomOf="@id/dash"
+        android:textColor="@color/primaryTextColor"
         tools:text="04.09.2018" />
-
-    <TextView
-        android:id="@+id/time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/text_margin"
-        android:textAppearance="?attr/textAppearanceListItem"
-        app:layout_constraintBottom_toTopOf="@+id/item_date"
-        app:layout_constraintStart_toEndOf="@+id/dash"
-        app:layout_constraintTop_toBottomOf="@+id/item_date"
-        tools:text="357" />
 
     <TextView
         android:id="@+id/dash"
@@ -34,8 +28,23 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/text_margin"
         android:text="@string/dash"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/item_date"
-        app:layout_constraintStart_toEndOf="@+id/item_date"
-        app:layout_constraintTop_toBottomOf="@+id/item_date" />
+        android:textColor="@color/primaryTextColor"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="parent" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textAppearance="?attr/textAppearanceListItem"
+        app:layout_constraintBottom_toTopOf="@+id/dash"
+        app:layout_constraintStart_toEndOf="@+id/dash"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dash"
+        android:textColor="@color/primaryTextColor"
+        tools:text="357" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

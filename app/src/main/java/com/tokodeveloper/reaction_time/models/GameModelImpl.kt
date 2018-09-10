@@ -1,9 +1,9 @@
 package com.tokodeveloper.reaction_time.models
 
+import kotlinx.coroutines.experimental.delay
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.concurrent.timerTask
 
 @Singleton
 class GameModelImpl @Inject constructor(private val minimumTime: Long) : GameModel {
@@ -32,17 +32,16 @@ class GameModelImpl @Inject constructor(private val minimumTime: Long) : GameMod
     override val finished: Boolean
         get() = _finished
 
-    override fun start(callback: (Boolean) -> Unit) {
+    override suspend fun start() {
         _startTime = 0
         _activated = false
 
         val randomTime = (((rand.nextInt(2) + rand.nextFloat()) + 2) * 1_000).toLong()
-        timer = Timer()
-        timer.schedule(timerTask {
-            _startTime = System.nanoTime()
-            _activated = true
-            callback(_activated)
-        }, randomTime)
+
+        delay(randomTime)
+
+        _startTime = System.nanoTime()
+        _activated = true
     }
 
     override fun stop(): Result {

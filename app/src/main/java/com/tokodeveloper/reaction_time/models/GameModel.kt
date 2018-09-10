@@ -1,7 +1,7 @@
 package com.tokodeveloper.reaction_time.models
 
 interface GameModel {
-    fun start(callback: (Boolean) -> Unit)
+    suspend fun start()
     fun stop(): Result
     fun restart()
     val active: Boolean

@@ -2,7 +2,6 @@ package com.tokodeveloper.reaction_time
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -61,13 +60,12 @@ class GameFragment : Fragment() {
                 if (it) {
                     averageLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.green))
                     averageText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.green))
-                    gameViewModel.average.value?.toLong()?.let {
+                    gameViewModel.average.value?.toLongOrNull()?.let {
                         submitScoreToLeaderboard(it)
                         checkAchievements(it)
                         saveScoreToDatabase(it)
                     }
                 } else {
-                    Log.d(TAG, "setColor red")
                     averageLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.red))
                     averageText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.red))
                 }

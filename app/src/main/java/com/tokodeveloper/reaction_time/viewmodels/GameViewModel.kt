@@ -64,8 +64,19 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
+    fun stopped() {
+        job?.apply {
+            cancel()
+            job = null
+        }
+        if (gameService.finished) {
+            restartVisible()
+        } else {
+            startVisible()
+        }
+    }
+
     fun reset() {
-        job?.cancel()
         gameService.restart()
         _gameState.postValue(gameService.state)
         _correct.postValue(emptyList())
@@ -78,12 +89,9 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
         _finished.postValue(false)
         waitVisible()
 
-        job = launch(CommonPool) {
-            gameService.start {
-                launch(UI) {
-                    stopVisible()
-                }
-            }
+        job = launch(UI) {
+            gameService.start()
+            stopVisible()
         }
     }
 

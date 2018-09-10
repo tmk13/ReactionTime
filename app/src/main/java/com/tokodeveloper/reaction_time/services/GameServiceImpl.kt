@@ -19,8 +19,8 @@ class GameServiceImpl @Inject constructor(private val gameModel: GameModel) : Ga
     override val finished: Boolean
         get() = gameModel.finished
 
-    override fun start(callback: (Boolean) -> Unit) {
-        gameModel.start(callback)
+    override suspend fun start() {
+        gameModel.start()
     }
 
     override fun stop() = gameModel.stop()
