@@ -1,0 +1,69 @@
+<resources>
+    <string name="app_id">824116602317</string>
+    <string name="server_client_id">AIzaSyCQY6EMCsSTCLf4DUMIQkPETbtFc0xyUxE</string>
+    <string name="package_name">com.tokodeveloper.reaction_time</string>
+
+    <string name="achievement_below_500">CgkIzcu1if4XEAIQAg</string>
+    <string name="achievement_below_450">CgkIzcu1if4XEAIQAw</string>
+    <string name="achievement_below_400">CgkIzcu1if4XEAIQBA</string>
+    <string name="achievement_below_375">CgkIzcu1if4XEAIQBQ</string>
+    <string name="achievement_below_350">CgkIzcu1if4XEAIQBg</string>
+    <string name="achievement_below_325">CgkIzcu1if4XEAIQBw</string>
+    <string name="achievement_below_300">CgkIzcu1if4XEAIQCA</string>
+    <string name="achievement_below_275">CgkIzcu1if4XEAIQCQ</string>
+    <string name="leaderboard_average_of_5">CgkIzcu1if4XEAIQCg</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
+    <string name="cubot"></string>
+    <string name="l65"></string>
+    <string name="J5"></string>
+    <string name="M4"></string>
+    <string name="PHONEPAD"></string>
+    <string name="G2Mini"></string>
+
+    <string name="app_name">Reaction Time - Czas reakcji</string>
+    <string name="start_game">Rozpocznij grę</string>
+    <string name="leaderboard">Tabela wyników</string>
+    <string name="achievements">Osiągnięcia</string>
+    <string name="consents">Zgody</string>
+    <string name="start">Start</string>
+    <string name="time">Czas</string>
+    <string name="average">Średnia:</string>
+    <string name="stop">Teraz!</string>
+    <string name="restart">Restart</string>
+    <string name="wait">Czekaj na zielone&#8230;</string>
+    <string name="time_1">Czas 1:</string>
+    <string name="time_2">Czas 2:</string>
+    <string name="time_3">Czas 3:</string>
+    <string name="time_4">Czas 4:</string>
+    <string name="time_5">Czas 5:</string>
+    <string name="error">Za szybko!</string>
+
+    <string name="notConnected">Najpierw się zaloguj!</string>
+    <string name="sign_out">Wyloguj</string>
+    <string name="history">Historia</string>
+    <string name="dash">-</string>
+
+    <string name="ask_for_age">Ile masz lat?</string>
+    <string name="age">Wiek</string>
+    <string name="what_age">Musisz mieć przynajmniej 16 lat, żeby używać tej Aplikacji.</string>
+    <string name="why_age">Ze względu na przepisy europejskie, musisz mieć przynajmniej 16 lat, żeby używać tej Aplikacji.</string>
+    <string name="statistics">Statystyki</string>
+    <string name="analytics">Informacje analityczne</string>
+    <string name="what_statistics">Firebase przechowuje twój Identyfikator Reklam Mobilnych, Android ID, Instance ID and Analytics App Instance IDs. ID poszczególnych danych jest usuwane po 60 dniach.</string>
+    <string name="why_statistics">Wysyłamy ta informację do Firebase, żeby lepiej rozumieć naszych użytkowników, pozwalając nam tworzyć lepsze Aplikacje.</string>
+    <string name="crash_reporting">Raporty błędów</string>
+    <string name="what_crash_reporting">Firebase przechowyje twój Instance ID i ślady awarii. Ślady awarii są usuwane po 180 dniach.</string>
+    <string name="why_crash_reporting">Potrzebujemy tego, żeby wiedzieć jak i kiedy zdarzają się awarie w naszej Aplikacji.</string>
+    <string name="ads_personalized">Reklamy spersonalizowane</string>
+    <string name="ads">Reklamy</string>
+    <string name="what_ads_personalized">Będziemy Tobie pokazywać spersonalizowane reklamy.</string>
+    <string name="why_ads_personalized">Potrzebujemy tego, żeby pokazywać Tobie spersonalizowane reklamy, używając identyfikatora mobilnego.</string>
+    <string name="ads_non_personalized">Reklamy niespersonalizowane</string>
+    <string name="what_ads_non_personalized">Będziemy Tobie pokazywać niespersonalizowane reklamy.</string>
+    <string name="why_ads_non_personalized">Nie będziemy zbierać Twoich danych dla spersonalizowanej reklamy. Chociaż niespersonalizowane reklamy nie używają identyfikatorów reklam mobilnych dla kierowania reklam, wciąż używają identyfikatorów reklam mobilnych dla ograniczania liczby wyswietleń i agregacji raportowania reklam jak również dla zwalczania oszustw i nadużyć.</string>
+    <string name="messaging">Wiadomości</string>
+    <string name="what_messaging">Potrzebujemy tego, żeby przesyłać wiadomości do Aplikacji</string>
+    <string name="why_messaging">Wysyłamy wiadomości z Firebase, żeby pokazać je w naszej Aplikacji</string>
+</resources>
