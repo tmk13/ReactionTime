@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="dae.gdprconsent">
+
+    <application
+        android:supportsRtl="true">
+        <activity
+            android:name=".ConsentActivity"
+            android:theme="@style/GDPR_AppTheme.NoActionBar">
+        </activity>
+    </application>
+
+</manifest>
