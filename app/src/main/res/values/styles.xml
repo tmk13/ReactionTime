@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="BaseAppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="BaseAppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryDark">@color/primaryDarkColor</item>
@@ -17,7 +17,6 @@
     </style>
 
     <style name="MenuButtonStyle">
-        <item name="android:background">@color/colorAccent</item>
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:layout_width">256dp</item>

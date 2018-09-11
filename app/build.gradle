@@ -8,7 +8,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.tokodeveloper.reaction_time"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 28
         multiDexEnabled true
         versionCode 3
