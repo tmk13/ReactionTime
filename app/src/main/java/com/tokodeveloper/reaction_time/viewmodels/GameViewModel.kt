@@ -65,14 +65,18 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     fun stopped() {
-        job?.apply {
-            cancel()
-            job = null
-        }
+        cancelJob()
         if (gameService.finished) {
             restartVisible()
         } else {
             startVisible()
+        }
+    }
+
+    fun cancelJob() {
+        job?.apply {
+            cancel()
+            job = null
         }
     }
 
@@ -96,6 +100,7 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
     }
 
     fun userClickedWaitButton() {
+        cancelJob()
         reset()
         _gameState.postValue(gameService.state)
         showError()
@@ -120,7 +125,10 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
                 setAverage()
                 checkFinished()
             }
-            is Error -> showError()
+            is Error -> {
+                cancelJob()
+                showError()
+            }
         }
     }
 
