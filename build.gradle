@@ -29,9 +29,9 @@ buildscript {
         gsonVersion = '2.8.2'
         junitVersion = '4.12'
         lifecycleVersion = '2.0.0-rc01'
-        materialVersion = '1.0.0-rc01'
+        materialVersion = '1.0.0-rc02'
         navigationVersion = '1.0.0-alpha05'
-        kotlinVersion = '1.2.61'
+        kotlinVersion = '1.2.70'
         ktlintVersion = '0.24.0'
         ktxVersion = '1.0.0-rc02'
         roomVersion = '1.1.1'
@@ -49,7 +49,7 @@ buildscript {
         maven { url 'https://jitpack.io' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.0-rc02'
+        classpath 'com.android.tools.build:gradle:3.2.0-rc03'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$safeArgsVersion"
         classpath "com.google.gms:google-services:$googleServicesVersion"
