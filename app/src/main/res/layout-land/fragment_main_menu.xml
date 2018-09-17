@@ -44,7 +44,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/adView" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/startGame"
             style="@style/MenuButtonStyle"
             android:layout_marginStart="8dp"
@@ -57,7 +57,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guidelineCenter" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/leaderboard"
             style="@style/MenuButtonStyle"
             android:layout_marginStart="8dp"
@@ -72,7 +72,7 @@
             app:layout_constraintStart_toStartOf="@id/guidelineCenter"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/achievements"
             style="@style/MenuButtonStyle"
             android:layout_marginStart="8dp"

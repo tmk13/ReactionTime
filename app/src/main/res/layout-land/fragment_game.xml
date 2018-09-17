@@ -233,11 +233,11 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.50" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/start"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/colorAccent"
+            android:backgroundTint="@color/colorAccent"
             android:onClick="@{() -> viewModel.userClickedStartButton()}"
             android:text="@string/start"
             android:textColor="@color/white"
@@ -248,11 +248,11 @@
             app:layout_constraintStart_toStartOf="@id/guidelineCenter"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/wait"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/red"
+            android:backgroundTint="@color/red"
             android:onClick="@{() -> viewModel.userClickedWaitButton()}"
             android:text="@string/wait"
             android:textSize="20sp"
@@ -262,11 +262,11 @@
             app:layout_constraintStart_toStartOf="@id/guidelineCenter"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/stop"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/green"
+            android:backgroundTint="@color/green"
             android:onClick="@{() -> viewModel.userClickedStopButton()}"
             android:text="@string/stop"
             android:textSize="20sp"
@@ -276,11 +276,11 @@
             app:layout_constraintStart_toStartOf="@id/guidelineCenter"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/restart"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@color/colorAccent"
+            android:backgroundTint="@color/colorAccent"
             android:onClick="@{() -> viewModel.userClickedRestartButton()}"
             android:text="@string/restart"
             android:textColor="@color/white"

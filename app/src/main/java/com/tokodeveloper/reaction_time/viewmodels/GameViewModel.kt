@@ -56,7 +56,7 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
         _finished.value = false
 
         showAverage = Transformations.map(_average) { it.isNotEmpty() }
-        correct = Transformations.map(_gameState) { it.values.map { !it.endsWith("!") } }
+        correct = Transformations.map(_gameState) { it.values.map { value -> !value.endsWith("!") } }
     }
 
     companion object {
@@ -64,7 +64,7 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    fun stopped() {
+    private fun stopped() {
         cancelJob()
         if (gameService.finished) {
             restartVisible()
@@ -73,14 +73,14 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
         }
     }
 
-    fun cancelJob() {
-        job?.apply {
+    private fun cancelJob() {
+        job?.run {
             cancel()
             job = null
         }
     }
 
-    fun reset() {
+    private fun reset() {
         gameService.restart()
         _gameState.postValue(gameService.state)
         _correct.postValue(emptyList())
