@@ -15,12 +15,6 @@
 
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
     <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="cubot"></string>
-    <string name="l65"></string>
-    <string name="J5"></string>
-    <string name="M4"></string>
-    <string name="PHONEPAD"></string>
-    <string name="G2Mini"></string>
 
     <string name="app_name">Reaction Time</string>
     <string name="start_game">Start Game</string>
@@ -28,6 +22,7 @@
     <string name="achievements">Achievements</string>
     <string name="consents">Consents</string>
     <string name="start">Start</string>
+    <string name="play">Play</string>
     <string name="time">Time</string>
     <string name="average">Average:</string>
     <string name="stop">Now!</string>
@@ -43,6 +38,7 @@
     <string name="notConnected">Sign in first!</string>
     <string name="sign_out">Sign Out</string>
     <string name="history">History</string>
+    <string name="privacy">Privacy Policy</string>
     <string name="dash">-</string>
 
     <string name="ask_for_age">How old are you?</string>
@@ -66,5 +62,4 @@
     <string name="messaging">Messaging</string>
     <string name="what_messaging">We need this to send messages to our App</string>
     <string name="why_messaging">We send messages through Firebase to show them in our App</string>
-    <string name="play">Play</string>
 </resources>

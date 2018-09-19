@@ -150,6 +150,11 @@ class MainMenuFragment : Fragment() {
                 ConsentHelper.showGdpr(requireActivity(), RC_CONSENT, list(requireContext()))
                 return true
             }
+            R.id.privacy -> {
+                val direction = MainMenuFragmentDirections.ActionMainMenuFragmentToPrivacyFragment()
+                findNavController().navigate(direction)
+                return true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
