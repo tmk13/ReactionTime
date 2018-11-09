@@ -9,19 +9,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
-import com.google.android.gms.ads.AdListener
-import com.google.android.gms.ads.InterstitialAd
-import com.google.android.gms.ads.MobileAds
 import com.tokodeveloper.reaction_time.data.BestTime
-import com.tokodeveloper.reaction_time.util.*
-import dae.gdprconsent.ConsentHelper
+import com.tokodeveloper.reaction_time.util.RC_CONSENT
+import com.tokodeveloper.reaction_time.util.RC_RESTART
 import dae.gdprconsent.Constants
 import kotlinx.android.synthetic.main.activity_reaction_time.*
 
 
 class ReactionTimeActivity : AppCompatActivity(), HistoryFragment.OnListFragmentInteractionListener {
-
-    private lateinit var interstitialAd: InterstitialAd
 
     companion object {
         val CHANGE_CONSENTS = "changeConsents"
@@ -35,28 +30,6 @@ class ReactionTimeActivity : AppCompatActivity(), HistoryFragment.OnListFragment
 
         setSupportActionBar(toolbar)
         NavigationUI.setupActionBarWithNavController(this, navController)
-
-        MobileAds.initialize(this, getString(R.string.banner_ad_unit_id))
-
-        val allowsPersonalizedAds = ConsentHelper.hasConsent(ADMOB_PERSONALIZED)
-
-        interstitialAd = InterstitialAd(this)
-        interstitialAd.adUnitId = getString(R.string.interstitial_ad_unit_id)
-        interstitialAd.adListener = object : AdListener() {
-            override fun onAdClosed() {
-                if (allowsPersonalizedAds) {
-                    showPersonalizedAds(this@ReactionTimeActivity, interstitialAd)
-                } else {
-                    showNonPersonalizedAds(this@ReactionTimeActivity, interstitialAd)
-                }
-            }
-        }
-
-        if (allowsPersonalizedAds) {
-            showPersonalizedAds(this, interstitialAd)
-        } else {
-            showNonPersonalizedAds(this, interstitialAd)
-        }
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -66,9 +39,6 @@ class ReactionTimeActivity : AppCompatActivity(), HistoryFragment.OnListFragment
     override fun onBackPressed() {
         if (Navigation.findNavController(this, R.id.reaction_nav_fragment)
                         .currentDestination?.id == R.id.gameFragment) {
-            if (interstitialAd.isLoaded) {
-                interstitialAd.show()
-            }
         }
         super.onBackPressed()
     }

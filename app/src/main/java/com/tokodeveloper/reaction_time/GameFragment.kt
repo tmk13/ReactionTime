@@ -14,18 +14,25 @@ import com.google.android.gms.games.Games
 import com.tokodeveloper.reaction_time.data.BestTime
 import com.tokodeveloper.reaction_time.data.BestTimeRepository
 import com.tokodeveloper.reaction_time.databinding.FragmentGameBinding
-import com.tokodeveloper.reaction_time.util.*
+import com.tokodeveloper.reaction_time.util.viewModelProvider
 import com.tokodeveloper.reaction_time.viewmodels.GameViewModel
-import dae.gdprconsent.ConsentHelper
 import dagger.android.support.AndroidSupportInjection
 import kotlinx.android.synthetic.main.fragment_game.*
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.joda.time.DateTime
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 
-class GameFragment : Fragment() {
+class GameFragment : Fragment(), CoroutineScope {
+
+    private val job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     @Inject
     lateinit var bestTimeRepository: BestTimeRepository
@@ -71,14 +78,6 @@ class GameFragment : Fragment() {
                 }
             }
         })
-
-        val allowsPersonalAds = ConsentHelper.hasConsent(ADMOB_PERSONALIZED)
-
-        if (allowsPersonalAds) {
-            showPersonalizedAds(requireActivity(), adView)
-        } else {
-            showNonPersonalizedAds(requireActivity(), adView)
-        }
     }
 
     override fun onAttach(context: Context?) {
@@ -133,7 +132,7 @@ class GameFragment : Fragment() {
     }
 
     private fun saveScoreToDatabase(score: Long) {
-        launch(CommonPool) {
+        launch(Dispatchers.IO) {
             val todayBestTime = bestTimeRepository.getBestTime(DateTime.now().withTimeAtStartOfDay())
 
             if (todayBestTime != null) {

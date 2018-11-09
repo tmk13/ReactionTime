@@ -21,3 +21,7 @@
 #-renamesourcefileattribute SourceFile
 
 -keep class dae.gdprconsent.** { *; }
+
+-keepclassmembernames class kotlinx.** {
+    volatile <fields>;
+}

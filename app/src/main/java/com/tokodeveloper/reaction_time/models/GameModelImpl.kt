@@ -1,6 +1,7 @@
 package com.tokodeveloper.reaction_time.models
 
-import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.delay
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -32,7 +33,7 @@ class GameModelImpl @Inject constructor(private val minimumTime: Long) : GameMod
     override val finished: Boolean
         get() = _finished
 
-    override suspend fun start() {
+    override suspend fun start() = coroutineScope {
         _startTime = 0
         _activated = false
 
