@@ -31,7 +31,7 @@ import kotlinx.android.synthetic.main.fragment_main_menu.*
 
 class MainMenuFragment : Fragment() {
 
-    private lateinit var signedInAccount: GoogleSignInAccount
+    private var signedInAccount: GoogleSignInAccount? = null
 
     private lateinit var menu: Menu
     private lateinit var snackbar: Snackbar
@@ -100,16 +100,9 @@ class MainMenuFragment : Fragment() {
         signInButton.setOnClickListener { startSignInIntent() }
         configureSnackbar()
 
-        val allowsPersonalAds = ConsentHelper.hasConsent(ADMOB_PERSONALIZED)
         val allowsStatistics = ConsentHelper.hasConsent(FIREBASE_STATISTICS)
         val allowsCrashReports = ConsentHelper.hasConsent(FIREBASE_CRASH)
         val allowsMessaging = ConsentHelper.hasConsent(FIREBASE_MESSAGING)
-
-        if (allowsPersonalAds) {
-            showPersonalizedAds(requireActivity(), adView)
-        } else {
-            showNonPersonalizedAds(requireActivity(), adView)
-        }
 
         FirebaseAnalytics.getInstance(requireActivity()).setAnalyticsCollectionEnabled(allowsStatistics)
 
@@ -148,6 +141,11 @@ class MainMenuFragment : Fragment() {
             }
             R.id.consents -> {
                 ConsentHelper.showGdpr(requireActivity(), RC_CONSENT, list(requireContext()))
+                return true
+            }
+            R.id.privacy -> {
+                val direction = MainMenuFragmentDirections.ActionMainMenuFragmentToPrivacyFragment()
+                findNavController().navigate(direction)
                 return true
             }
             else -> super.onOptionsItemSelected(item)

@@ -24,6 +24,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_mainMenuFragment_to_privacyFragment"
+            app:destination="@id/privacyFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
@@ -35,4 +42,9 @@
         android:name="com.tokodeveloper.reaction_time.HistoryFragment"
         android:label="@string/history"
         tools:layout="@layout/fragment_time_list" />
+    <fragment
+        android:id="@+id/privacyFragment"
+        android:name="com.tokodeveloper.reaction_time.PrivacyFragment"
+        android:label="@string/privacy"
+        tools:layout="@layout/fragment_privacy" />
 </navigation>

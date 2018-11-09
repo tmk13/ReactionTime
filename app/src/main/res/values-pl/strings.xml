@@ -13,14 +13,8 @@
     <string name="achievement_below_275">CgkIzcu1if4XEAIQCQ</string>
     <string name="leaderboard_average_of_5">CgkIzcu1if4XEAIQCg</string>
 
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="cubot"></string>
-    <string name="l65"></string>
-    <string name="J5"></string>
-    <string name="M4"></string>
-    <string name="PHONEPAD"></string>
-    <string name="G2Mini"></string>
+    <string name="banner_ad_unit_id">ca-app-pub-3463077628785956/8635354221</string>
+    <string name="interstitial_ad_unit_id">ca-app-pub-3463077628785956/1550468518</string>
 
     <string name="app_name">Reaction Time - Czas reakcji</string>
     <string name="start_game">Rozpocznij grę</string>
@@ -28,6 +22,7 @@
     <string name="achievements">Osiągnięcia</string>
     <string name="consents">Zgody</string>
     <string name="start">Start</string>
+    <string name="play">Graj</string>
     <string name="time">Czas</string>
     <string name="average">Średnia:</string>
     <string name="stop">Teraz!</string>
@@ -43,6 +38,7 @@
     <string name="notConnected">Najpierw się zaloguj!</string>
     <string name="sign_out">Wyloguj</string>
     <string name="history">Historia</string>
+    <string name="privacy">Polityka prywatności</string>
     <string name="dash">-</string>
 
     <string name="ask_for_age">Ile masz lat?</string>

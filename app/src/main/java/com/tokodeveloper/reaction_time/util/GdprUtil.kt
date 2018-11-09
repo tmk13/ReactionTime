@@ -51,27 +51,5 @@ fun list(context: Context): ArrayList<ConsentRequest> {
             moreInformation = "https://firebase.google.com/support/privacy"
     ))
 
-    list.add(ConsentRequest(
-            key = ADMOB_PERSONALIZED,
-            isRequired = false,
-            added = "2018-09-06",
-            title = context.getString(R.string.ads_personalized),
-            category = context.getString(R.string.ads),
-            what = context.getString(R.string.what_ads_personalized),
-            whyNeeded = context.getString(R.string.why_ads_personalized),
-            moreInformation = "https://support.google.com/admob/answer/9012903"
-    ))
-
-    list.add(ConsentRequest(
-            key = ADMOB_NON_PERSONALIZED,
-            isRequired = true,
-            added = "2018-09-06",
-            title = context.getString(R.string.ads_non_personalized),
-            category = context.getString(R.string.ads),
-            what = context.getString(R.string.what_ads_non_personalized),
-            whyNeeded = context.getString(R.string.why_ads_non_personalized),
-            moreInformation = "https://support.google.com/admob/answer/9012903"
-    ))
-
     return list
 }

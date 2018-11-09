@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RODO</string>
+
+    <string name="gdpr_consent">Zgoda</string>
+    <string name="gdpr_give_consent">Udziel zgody</string>
+    <string name="gdpr_withdraw_consent">Wycofaj zgodę</string>
+    <string name="gdpr_caption_required">Wymagane</string>
+    <string name="gdpr_caption_not_required">Nie wymagane</string>
+    <string name="gdpr_visit_page">Odwiedź stronę</string>
+    <string name="gdpr_snack_required">Wymagamy tej zgody, dla funkcjonowania Aplikacji…</string>
+    <string name="gdpr_snack_new_consent">Jest wymagana nowa zgoda.</string>
+    <string name="gdpr_header_why">Dlaczego</string>
+    <string name="gdpr_header_more_information">Więcej informacji</string>
+    <string name="gdpr_header_what">Co</string>
+    <string name="gdpr_image_alt_is_consented">Zgoda udzielona</string>
+    <string name="gdpr_image_alt_is_not_consented">Zgoda nie udzielona</string>
+    <string name="gdpr_consent_not_yet_given">Zgoda nie została jeszcze udzielona. Aplikacja może mieć zmniejszoną funkcjonalność.</string>
+</resources>

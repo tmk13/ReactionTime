@@ -5,16 +5,16 @@ import com.tokodeveloper.reaction_time.models.Error
 import com.tokodeveloper.reaction_time.models.Result
 import com.tokodeveloper.reaction_time.models.Success
 import com.tokodeveloper.reaction_time.services.GameService
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.withContext
+import kotlinx.coroutines.*
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
-class GameViewModel @Inject constructor(private val gameService: GameService) : ViewModel(), LifecycleObserver {
+class GameViewModel @Inject constructor(private val gameService: GameService) : ViewModel(), LifecycleObserver, CoroutineScope {
 
-    private var job: Job? = null
+    private val job = Job()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     private var _gameState = MutableLiveData<HashMap<Int, String>>()
     private var _correct = MutableLiveData<List<Boolean>>()
@@ -64,8 +64,8 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
-    private fun stopped() {
-        cancelJob()
+    private fun stop() {
+        cancelJobs()
         if (gameService.finished) {
             restartVisible()
         } else {
@@ -73,11 +73,13 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
         }
     }
 
-    private fun cancelJob() {
-        job?.run {
-            cancel()
-            job = null
-        }
+    override fun onCleared() {
+        super.onCleared()
+        job.cancel()
+    }
+
+    private fun cancelJobs() {
+        job.children.forEach { it.cancel() }
     }
 
     private fun reset() {
@@ -93,14 +95,14 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
         _finished.postValue(false)
         waitVisible()
 
-        job = launch(UI) {
+        launch {
             gameService.start()
             stopVisible()
         }
     }
 
     fun userClickedWaitButton() {
-        cancelJob()
+        cancelJobs()
         reset()
         _gameState.postValue(gameService.state)
         showError()
@@ -110,8 +112,8 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
     fun userClickedStopButton() {
         startVisible()
 
-        launch(UI) {
-            val result = withContext(CommonPool) {
+        launch {
+            val result = withContext(Dispatchers.Default) {
                 gameService.stop()
             }
             checkResult(result)
@@ -126,7 +128,7 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
                 checkFinished()
             }
             is Error -> {
-                cancelJob()
+                cancelJobs()
                 showError()
             }
         }
