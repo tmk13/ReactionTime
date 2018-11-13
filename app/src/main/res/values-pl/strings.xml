@@ -36,6 +36,7 @@
     <string name="error">Za szybko!</string>
 
     <string name="notConnected">Najpierw się zaloguj!</string>
+    <string name="sign_in">Zaloguj</string>
     <string name="sign_out">Wyloguj</string>
     <string name="history">Historia</string>
     <string name="privacy">Polityka prywatności</string>

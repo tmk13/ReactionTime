@@ -36,6 +36,7 @@
     <string name="error">Too quickly!</string>
 
     <string name="notConnected">Sign in first!</string>
+    <string name="sign_in">Sign In</string>
     <string name="sign_out">Sign Out</string>
     <string name="history">History</string>
     <string name="privacy">Privacy Policy</string>

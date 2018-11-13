@@ -120,9 +120,9 @@ class MainMenuFragment : Fragment() {
         this.menu = menu!!
 
         if (isSignedIn()) {
-            setSingOutMenuVisibility(true)
+            setSignInAndOutMenuVisibility(true)
         } else {
-            setSingOutMenuVisibility(false)
+            setSignInAndOutMenuVisibility(false)
         }
 
         super.onCreateOptionsMenu(menu, inflater)
@@ -130,6 +130,10 @@ class MainMenuFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         return when (item?.itemId) {
+            R.id.signIn -> {
+                startSignInIntent()
+                return true
+            }
             R.id.signOut -> {
                 signOut()
                 return true
@@ -170,7 +174,7 @@ class MainMenuFragment : Fragment() {
             try {
                 signedInAccount = task.getResult(ApiException::class.java)
                 signInButton.visibility = View.GONE
-                setSingOutMenuVisibility(true)
+                setSignInAndOutMenuVisibility(true)
             } catch (apiException: ApiException) {
                 GoogleApiAvailability.getInstance().getErrorDialog(requireActivity(), apiException.statusCode, GOOGLE_API_ERROR).show()
             }
@@ -221,7 +225,7 @@ class MainMenuFragment : Fragment() {
             signInClient.signOut().addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     signInButton.visibility = View.VISIBLE
-                    setSingOutMenuVisibility(false)
+                    setSignInAndOutMenuVisibility(false)
                 } else {
 
                 }
@@ -231,8 +235,9 @@ class MainMenuFragment : Fragment() {
         }
     }
 
-    private fun setSingOutMenuVisibility(visible: Boolean) {
-        menu.findItem(R.id.signOut).isVisible = visible
+    private fun setSignInAndOutMenuVisibility(signedIn: Boolean) {
+        menu.findItem(R.id.signIn).isVisible = !signedIn
+        menu.findItem(R.id.signOut).isVisible = signedIn
     }
 
     private fun configureSnackbar() {
