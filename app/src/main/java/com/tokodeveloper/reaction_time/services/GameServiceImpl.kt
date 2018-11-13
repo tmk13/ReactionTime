@@ -23,7 +23,7 @@ class GameServiceImpl @Inject constructor(private val gameModel: GameModel) : Ga
         gameModel.start()
     }
 
-    override fun stop() = gameModel.stop()
+    override suspend fun stop() = gameModel.stop()
 
     override fun restart() {
         gameModel.restart()

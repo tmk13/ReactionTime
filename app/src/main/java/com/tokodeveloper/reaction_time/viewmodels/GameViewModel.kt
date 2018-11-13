@@ -5,7 +5,10 @@ import com.tokodeveloper.reaction_time.models.Error
 import com.tokodeveloper.reaction_time.models.Result
 import com.tokodeveloper.reaction_time.models.Success
 import com.tokodeveloper.reaction_time.services.GameService
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.coroutines.CoroutineContext
 
@@ -113,9 +116,7 @@ class GameViewModel @Inject constructor(private val gameService: GameService) : 
         startVisible()
 
         launch {
-            val result = withContext(Dispatchers.Default) {
-                gameService.stop()
-            }
+            val result = gameService.stop()
             checkResult(result)
         }
     }

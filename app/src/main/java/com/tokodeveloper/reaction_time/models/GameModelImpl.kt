@@ -1,7 +1,8 @@
 package com.tokodeveloper.reaction_time.models
 
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -33,7 +34,7 @@ class GameModelImpl @Inject constructor(private val minimumTime: Long) : GameMod
     override val finished: Boolean
         get() = _finished
 
-    override suspend fun start() = coroutineScope {
+    override suspend fun start() = withContext(Dispatchers.Default) {
         _startTime = 0
         _activated = false
 
@@ -45,10 +46,10 @@ class GameModelImpl @Inject constructor(private val minimumTime: Long) : GameMod
         _activated = true
     }
 
-    override fun stop(): Result {
+    override suspend fun stop() = withContext(Dispatchers.Default) {
         val stopTime = (System.nanoTime() - _startTime) / 1_000_000
 
-        return when {
+        when {
             stopTime >= minimumTime -> {
                 _gameState += ++_currentTimeId to stopTime.toString()
                 computeAverage()
