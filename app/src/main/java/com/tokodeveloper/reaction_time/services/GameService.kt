@@ -4,7 +4,7 @@ import com.tokodeveloper.reaction_time.models.Result
 
 interface GameService {
     suspend fun start()
-    fun stop(): Result
+    suspend fun stop(): Result
     fun restart()
     val active: Boolean
     val state: HashMap<Int, String>
