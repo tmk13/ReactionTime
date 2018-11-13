@@ -67,10 +67,10 @@ class GameFragment : Fragment(), CoroutineScope {
                 if (it) {
                     averageLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.green))
                     averageText.setTextColor(ContextCompat.getColor(requireActivity(), R.color.green))
-                    gameViewModel.average.value?.toLongOrNull()?.let {
-                        submitScoreToLeaderboard(it)
-                        checkAchievements(it)
-                        saveScoreToDatabase(it)
+                    gameViewModel.average.value?.toLongOrNull()?.let { score ->
+                        submitScoreToLeaderboard(score)
+                        checkAchievements(score)
+                        saveScoreToDatabase(score)
                     }
                 } else {
                     averageLabel.setTextColor(ContextCompat.getColor(requireActivity(), R.color.red))
