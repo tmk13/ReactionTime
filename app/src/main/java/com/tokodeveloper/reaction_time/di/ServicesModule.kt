@@ -4,15 +4,14 @@ import com.tokodeveloper.reaction_time.services.GameService
 import com.tokodeveloper.reaction_time.services.GameServiceImpl
 import dagger.Module
 import dagger.Provides
-import javax.inject.Singleton
 
 @Module
 class ServicesModule {
 
     @Provides
+    @MinTime
     fun provideMinimumTime(): Long = 200
 
-    @Singleton
     @Provides
-    fun provideGameService(minimumTime: Long): GameService = GameServiceImpl(minimumTime)
+    fun provideGameService(gameServiceImpl: GameServiceImpl): GameService = gameServiceImpl
 }
