@@ -1,5 +1,6 @@
 package com.tokodeveloper.reaction_time.services
 
+import com.tokodeveloper.reaction_time.di.MinTime
 import com.tokodeveloper.reaction_time.models.Error
 import com.tokodeveloper.reaction_time.models.Success
 import kotlinx.coroutines.Dispatchers
@@ -9,7 +10,8 @@ import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
-class GameServiceImpl(private val minimumTime: Long) : GameService {
+@Singleton
+class GameServiceImpl @Inject constructor(@MinTime private val minimumTime: Long) : GameService {
 
     private val rand = Random()
     private var timer = Timer()
